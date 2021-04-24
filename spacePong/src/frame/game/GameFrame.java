@@ -26,9 +26,9 @@ public class GameFrame extends JFrame {
 	}
 	
 	private void layoutManager() {
-		topPanel = new TopPanel();
-		gamePanel = new GamePanel();
-		belowPanel = new BelowPanel();
+		topPanel = new TopPanel(this);
+		gamePanel = new GamePanel(this);
+		belowPanel = new BelowPanel(this);
 
 		SpringLayout springLayout = new SpringLayout();
 		contentPane.setLayout(springLayout);

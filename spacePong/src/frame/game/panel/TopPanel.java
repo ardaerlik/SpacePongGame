@@ -1,14 +1,14 @@
 package frame.game.panel;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class TopPanel extends JPanel {
 
-	/**
-	 * Create the panel.
-	 */
-	public TopPanel() {
-
+	private JFrame frame;
+	
+	public TopPanel(JFrame frame) {
+		this.frame = frame;
 	}
 
 }
