@@ -5,15 +5,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+
+import frame.game.GameFrame;
+import frame.game.panel.Mode;
 
 public class HelpButton extends JButton {
 	
-	public enum Mode {ON, OFF};
 	private Mode mode;
-	private JFrame frame;
+	private GameFrame frame;
 	
-	public HelpButton(JFrame frame) {
+	public HelpButton(GameFrame frame) {
 		this.frame = frame;
 		
 		setText("");
@@ -23,7 +24,7 @@ public class HelpButton extends JButton {
 		setIcon(new ImageIcon("spacePong/assets/images/gameButtons/help.png"));
 		addActionListener(new Handler());
 		
-		mode = Mode.OFF;
+		mode = Mode.RESUME;
 	}
 	
 	public Mode getMode() {
@@ -34,7 +35,16 @@ public class HelpButton extends JButton {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			mode = Mode.ON;		
+			switch (mode) {
+				case RESUME:
+					frame.getGamePanel().pauseGame();
+					mode = Mode.PAUSE;
+					break;
+				case PAUSE:
+					frame.getGamePanel().resumeGame();
+					mode = Mode.RESUME;
+					break;		
+			}
 		}
 		
 	}

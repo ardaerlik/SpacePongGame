@@ -1,5 +1,6 @@
 package frame.game.panel;
 
+import frame.game.GameFrame;
 import frame.game.panel.component.button.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,9 +10,9 @@ public class BelowPanel extends JPanel {
 	private PauseButton pauseButton;
 	private HelpButton helpButton;
 	private ExitButton exitButton;
-	private JFrame frame;
+	private GameFrame frame;
 	
-	public BelowPanel(JFrame frame) {
+	public BelowPanel(GameFrame frame) {
 		this.frame = frame;
 
 		layoutManager();

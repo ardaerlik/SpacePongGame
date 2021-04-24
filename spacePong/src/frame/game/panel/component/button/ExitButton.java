@@ -31,7 +31,8 @@ public class ExitButton extends JButton {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mode = Mode.ON;
-			frame.dispose();
+			frame.setVisible(false);
+			// frame.dispose();
 		}
 		
 	}

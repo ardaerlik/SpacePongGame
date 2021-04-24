@@ -4,21 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+
+import frame.game.GameFrame;
+import frame.game.panel.Mode;
 
 public class PauseButton extends JButton {
 	
-	public enum Mode {PAUSE, RESUME};
 	private Mode mode;
-	private JFrame frame;
+	private GameFrame frame;
 	
-	public PauseButton(JFrame frame) {
+	public PauseButton(GameFrame frame) {
 		this.frame = frame;
 		
 		setText("");
 		setBorderPainted(false);
 		setBounds(frame.getWidth()/2-40, 5, 80, 80);
-		setToolTipText("Click this button to get help");
+		setToolTipText("Click this button to resume game");
 		setIcon(new ImageIcon("spacePong/assets/images/gameButtons/resume.png"));
 		addActionListener(new Handler());
 		
@@ -36,11 +37,13 @@ public class PauseButton extends JButton {
 			
 			switch (mode) {
 				case PAUSE:
+					frame.getGamePanel().resumeGame();
 					setToolTipText("Click this button to pause game");
 					setIcon(new ImageIcon("spacePong/assets/images/gameButtons/pause.png"));
 					mode = Mode.RESUME;
 					break;
 				case RESUME:
+					frame.getGamePanel().pauseGame();
 					setToolTipText("Click this button to resume game");
 					setIcon(new ImageIcon("spacePong/assets/images/gameButtons/resume.png"));
 					mode = Mode.PAUSE;

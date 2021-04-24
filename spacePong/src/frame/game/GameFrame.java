@@ -10,9 +10,9 @@ import javax.swing.SpringLayout;
 public class GameFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel topPanel;
-	private JPanel gamePanel;
-	private JPanel belowPanel;
+	private TopPanel topPanel;
+	private GamePanel gamePanel;
+	private BelowPanel belowPanel;
 
 	public GameFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +27,7 @@ public class GameFrame extends JFrame {
 	
 	private void layoutManager() {
 		topPanel = new TopPanel(this);
-		gamePanel = new GamePanel(this);
+		gamePanel = new GamePanel(this, topPanel);
 		belowPanel = new BelowPanel(this);
 
 		SpringLayout springLayout = new SpringLayout();
@@ -55,6 +55,18 @@ public class GameFrame extends JFrame {
 		contentPane.add(topPanel);
 		contentPane.add(gamePanel);
 		contentPane.add(belowPanel);
+	}
+	
+	public GamePanel getGamePanel() {
+		return this.gamePanel;
+	}
+	
+	public TopPanel getTopPanel() {
+		return this.topPanel;
+	}
+	
+	public BelowPanel getBelowPanel() {
+		return this.belowPanel;
 	}
 
 }
