@@ -12,10 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import frame.game.GameFrame;
+import frame.game.panel.component.stellar.Ball;
 
 public class GamePanel extends JPanel 
 	implements ActionListener, KeyListener {
-	
+
 	private enum PressedKey {LEFT, RIGHT};
 	private GameFrame frame;
 	private TopPanel topPanel;
@@ -28,6 +29,7 @@ public class GamePanel extends JPanel
 	private int paddlePositionX = 50;
 	private int paddleVelocity = 30;
 	private ArrayList<PressedKey> pressedKeys;
+	private Ball ball;
 	
 	public GamePanel(GameFrame frame, TopPanel topPanel) {
 		this.frame = frame;
@@ -40,6 +42,7 @@ public class GamePanel extends JPanel
 		requestFocusInWindow();
 		addKeyListener(this);
 		
+		ball = new Ball(this);
 		timer = new Timer(20, this);
 		playGame();
 	}
@@ -75,10 +78,17 @@ public class GamePanel extends JPanel
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
+		
 		g.setColor(Color.BLACK);
 		g.fillRect(paddlePositionX, paddlePositionY, PADDLE_WIDTH, PADDLE_HEIGHT);
+		
+		paintBall(g);
 
+	}
+	
+	private void paintBall(Graphics g) {
+		ball.move();
+		g.drawImage(ball.getImage(), ball.getPositionX(), ball.getPositionY(), null);
 	}
 	
 	private void smoothPaddle(Graphics g) {
@@ -134,5 +144,9 @@ public class GamePanel extends JPanel
 		return this.paddleVelocity;
 	}
 	
+	public int[] getPaddlePosition() {
+		int[] position = {paddlePositionX, paddlePositionY};
+		return position;
+	}
 	
 }
