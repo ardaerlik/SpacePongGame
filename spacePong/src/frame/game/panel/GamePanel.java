@@ -1,9 +1,13 @@
 package frame.game.panel;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -11,41 +15,43 @@ import frame.game.GameFrame;
 
 public class GamePanel extends JPanel 
 	implements ActionListener, KeyListener {
-
+	
+	private enum PressedKey {LEFT, RIGHT};
 	private GameFrame frame;
 	private TopPanel topPanel;
 	private Mode mode;
 	private Timer timer;
+	private long checkedTime;
 	private final int PADDLE_WIDTH = 120;
 	private final int PADDLE_HEIGHT = 10;
-	private final int paddlePositionY = 600;
+	private final int paddlePositionY = 470;
 	private int paddlePositionX = 50;
 	private int paddleVelocity = 30;
-
+	private ArrayList<PressedKey> pressedKeys;
 	
 	public GamePanel(GameFrame frame, TopPanel topPanel) {
 		this.frame = frame;
 		this.topPanel = topPanel;
 		this.mode = Mode.PAUSE;
 		
+		pressedKeys = new ArrayList<PressedKey>();
+		
 		setFocusable(true);
 		requestFocusInWindow();
 		addKeyListener(this);
 		
-		timer = new Timer(25, this);
-		timer.start();
+		timer = new Timer(20, this);
+		playGame();
 	}
 	
 	public void pauseGame() {
 		switch (mode) {
 			case RESUME:
-				System.out.println("Game has just paused");
 				topPanel.getTimerPanel().pauseTimer();
 				requestFocusInWindow();
 				mode = Mode.PAUSE;
 				break;
 			case PAUSE:
-				System.out.println("Game has already paused");
 				break;
 		}
 	}
@@ -53,26 +59,46 @@ public class GamePanel extends JPanel
 	public void resumeGame() {
 		switch (mode) {
 			case PAUSE:
-				System.out.println("Game has just resumed");
 				topPanel.getTimerPanel().startTimer();
 				requestFocusInWindow();
 				mode = Mode.RESUME;
 				break;
 			case RESUME:
-				System.out.println("Game has already resumed");
 				break;
 		}
 	}
 	
-	public void play() {
+	public void playGame() {
+		timer.start();
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		g.setColor(Color.BLACK);
+		g.fillRect(paddlePositionX, paddlePositionY, PADDLE_WIDTH, PADDLE_HEIGHT);
+
+	}
+	
+	private void smoothPaddle(Graphics g) {
 		
 	}
 	
-	public boolean isValidPosition() {return false;}
+	private boolean isValidPosition(PressedKey e) {
+		switch (e) {
+			case LEFT:
+				return (paddlePositionX-paddleVelocity >= -20);
+			case RIGHT:
+				return (paddlePositionX+PADDLE_WIDTH+paddleVelocity <= frame.getWidth()+20);
+			default:
+				return false;
+		}
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		;
+		if (mode == Mode.RESUME) {repaint();}
 		
 	}
 
@@ -82,12 +108,14 @@ public class GamePanel extends JPanel
 		
 		switch (e.getKeyCode()) {
 			case (37):
-				System.out.println("left");
-				paddlePositionX -= paddleVelocity;
+				if (isValidPosition(PressedKey.LEFT)) {
+					paddlePositionX -= paddleVelocity;
+				}
 				break;
 			case (39):
-				System.out.println("right");
-				paddlePositionX += paddleVelocity;
+				if (isValidPosition(PressedKey.RIGHT)) {
+					paddlePositionX += paddleVelocity;
+				}
 				break;
 		}
 	}
@@ -105,5 +133,6 @@ public class GamePanel extends JPanel
 	public int getPaddleVelocity() {
 		return this.paddleVelocity;
 	}
+	
 	
 }
