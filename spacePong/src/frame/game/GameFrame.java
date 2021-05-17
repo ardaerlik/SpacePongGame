@@ -1,7 +1,6 @@
 package frame.game;
 
 import frame.game.panel.*;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -55,6 +54,10 @@ public class GameFrame extends JFrame {
 		contentPane.add(topPanel);
 		contentPane.add(gamePanel);
 		contentPane.add(belowPanel);
+	}
+	
+	public void setTheme(GameTheme theme) {
+		
 	}
 	
 	public GamePanel getGamePanel() {

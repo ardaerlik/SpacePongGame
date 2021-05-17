@@ -13,23 +13,30 @@ import javax.swing.Timer;
 
 import frame.game.GameFrame;
 import frame.game.panel.component.stellar.Ball;
+import frame.game.panel.component.stellar.GameObject;
+import frame.game.panel.component.stellar.GameObjectHelper;
+import frame.game.panel.component.stellar.Meteor;
 
 public class GamePanel extends JPanel 
 	implements ActionListener, KeyListener {
-
+	
+	private ArrayList<GameObject> gameObjects;
 	private enum PressedKey {LEFT, RIGHT};
 	private GameFrame frame;
 	private TopPanel topPanel;
 	private Mode mode;
 	private Timer timer;
-	private long checkedTime;
 	private final int PADDLE_WIDTH = 120;
 	private final int PADDLE_HEIGHT = 10;
 	private final int paddlePositionY = 470;
 	private int paddlePositionX = 50;
-	private int paddleVelocity = 30;
+	private int paddleVelocity = 4;
 	private ArrayList<PressedKey> pressedKeys;
+	private int pressedKeysLoc;
+	private int pressedKeysLocInt;
+	private boolean isValid;
 	private Ball ball;
+	private Meteor meteor;
 	
 	public GamePanel(GameFrame frame, TopPanel topPanel) {
 		this.frame = frame;
@@ -37,12 +44,17 @@ public class GamePanel extends JPanel
 		this.mode = Mode.PAUSE;
 		
 		pressedKeys = new ArrayList<PressedKey>();
+		pressedKeysLoc = 0;
+		pressedKeysLocInt = 0;
+		
+		gameObjects = new ArrayList<GameObject>();
 		
 		setFocusable(true);
 		requestFocusInWindow();
 		addKeyListener(this);
 		
 		ball = new Ball(this);
+		meteor = new Meteor(this);
 		timer = new Timer(20, this);
 		playGame();
 	}
@@ -78,12 +90,9 @@ public class GamePanel extends JPanel
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
-		g.setColor(Color.BLACK);
-		g.fillRect(paddlePositionX, paddlePositionY, PADDLE_WIDTH, PADDLE_HEIGHT);
-		
+		smoothPaddle(g);		
 		paintBall(g);
-
+		paintObjects(g);
 	}
 	
 	private void paintBall(Graphics g) {
@@ -91,8 +100,37 @@ public class GamePanel extends JPanel
 		g.drawImage(ball.getImage(), ball.getPositionX(), ball.getPositionY(), null);
 	}
 	
+	private void paintObjects(Graphics g) {
+		g.drawImage(meteor.getImage(), meteor.getPositionX(), meteor.getPositionY(), null);
+	}
+	
 	private void smoothPaddle(Graphics g) {
+		if (pressedKeysLoc < pressedKeys.size()) {
+			
+			if (pressedKeysLocInt == 0) {
+				isValid = isValidPosition(pressedKeys.get(pressedKeysLoc));
+			}
+			
+			if (isValid) {
+				if (pressedKeysLocInt < 5) {
+					if (pressedKeys.get(pressedKeysLoc) == PressedKey.LEFT){
+						paddlePositionX -= paddleVelocity;
+					} else {
+						paddlePositionX += paddleVelocity;
+					}
+					pressedKeysLocInt++;
+				} else {
+					pressedKeysLoc++;
+					pressedKeysLocInt = 0;
+				}
+			}
+			else {
+				pressedKeysLoc++;
+			}
+		}
 		
+		g.setColor(Color.BLACK);
+		g.fillRect(paddlePositionX, paddlePositionY, PADDLE_WIDTH, PADDLE_HEIGHT);
 	}
 	
 	private boolean isValidPosition(PressedKey e) {
@@ -108,8 +146,14 @@ public class GamePanel extends JPanel
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (mode == Mode.RESUME) {repaint();}
+		if (GameObjectHelper.intersects(meteor, ball)) {
+			System.out.println("carpisti");
+			mode = Mode.PAUSE;
+		}
 		
+		if (mode == Mode.RESUME) {
+			repaint();
+		}
 	}
 
 	@Override
@@ -119,12 +163,12 @@ public class GamePanel extends JPanel
 		switch (e.getKeyCode()) {
 			case (37):
 				if (isValidPosition(PressedKey.LEFT)) {
-					paddlePositionX -= paddleVelocity;
+					pressedKeys.add(PressedKey.LEFT);
 				}
 				break;
 			case (39):
 				if (isValidPosition(PressedKey.RIGHT)) {
-					paddlePositionX += paddleVelocity;
+					pressedKeys.add(PressedKey.RIGHT);
 				}
 				break;
 		}

@@ -1,14 +1,17 @@
 package frame.game.panel.component.stellar;
 
 import java.awt.Image;
-import javax.swing.ImageIcon;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import frame.game.panel.GamePanel;
 
-public class Ball extends StellarObject {
+public class Ball extends GameObject {
 	
 	private GamePanel panel;
-	private ImageIcon ballIMG;
+	private Image ballImage;
+	private BufferedImage ballBuffImage;
 	private final int WIDTH = 30;
 	private final int HEIGHT = 30;
 	private final double ACCELERATION = 0.25f;
@@ -18,13 +21,24 @@ public class Ball extends StellarObject {
 	private int positionX;
 	
 	public Ball(GamePanel panel) {
-		ballIMG = new ImageIcon("spacePong/assets/images/gameObjects/ball.png");
-		
 		this.panel = panel;
 		this.positionX = 10;
 		this.positionY = 60;
 		this.velocityY = 2;
 		this.velocityX = 4.5;
+		
+		try {
+			ballBuffImage = ImageIO.read(new File("spacePong/assets/images/gameObjects/ball.png"));
+			super.setBuffImage(ballBuffImage);
+			this.ballImage = ballBuffImage.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		super.setPositionX(positionX);
+		super.setPositionY(positionY);
+		super.setHeight(HEIGHT);
+		super.setWidth(WIDTH);
 	}
 	
 	public void move() {
@@ -32,7 +46,10 @@ public class Ball extends StellarObject {
 		positionX += velocityX;
 		positionY += velocityY;
 		velocityY += ACCELERATION;
-		System.out.printf("%s %s%n", velocityX, velocityY);
+		
+		super.setPositionX(positionX);
+		super.setPositionY(positionY);
+		super.updateRectangle();
 	}
 	
 	private void moveController() {
@@ -57,7 +74,7 @@ public class Ball extends StellarObject {
 	}
 	
 	public Image getImage() {
-		return this.ballIMG.getImage();
+		return this.ballImage;
 	}
 	
 	public int getWidth() {
