@@ -24,4 +24,23 @@ public class GameObjectHelper {
 		}
 	}
 	
+	public static boolean paddleIntersects(Rectangle paddle, GameObject object) {
+		if (object.getRectangle().intersects(paddle)) {
+			Rectangle intersection = object.getRectangle().intersection(paddle);
+			for (int i=0; i<intersection.width; i++) {
+				for (int j=0; j<intersection.height; j++) {
+					int pixel = object.getBuffImage().getRGB(i, j);
+					
+					if (pixel>>24 != 0x00) {
+						return true;
+					}
+				}
+			}
+			
+			return false;
+		} else {
+			return false;
+		}
+	}
+	
 }

@@ -5,14 +5,20 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class GameObject {
+	
 	private BufferedImage image;
 	private Rectangle rectangle;
-	private int positionX;
-	private int positionY;
-	private int width;
-	private int height;
+	protected int positionX;
+	protected int positionY;
+	protected int width;
+	protected int height;
 	
-	public GameObject() {
+	public GameObject(int positionX, int positionY, int width, int height) {
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.width = width;
+		this.height = height;
+		
 		updateRectangle();
 	}
 	
@@ -71,6 +77,10 @@ public class GameObject {
 
 	public void setImage(BufferedImage image) {
 		this.image = image;
+	}
+
+	public void setRectangle(Rectangle rectangle) {
+		this.rectangle = rectangle;
 	}
 
 }

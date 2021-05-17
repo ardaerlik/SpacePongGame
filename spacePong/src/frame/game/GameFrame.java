@@ -4,14 +4,20 @@ import frame.game.panel.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
-import javax.swing.SpringLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GameFrame extends JFrame {
+import javax.swing.SpringLayout;
+import javax.swing.Timer;
+
+public class GameFrame extends JFrame 
+	implements ActionListener {
 
 	private JPanel contentPane;
 	private TopPanel topPanel;
 	private GamePanel gamePanel;
 	private BelowPanel belowPanel;
+	private boolean newLevel;
 
 	public GameFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,6 +28,12 @@ public class GameFrame extends JFrame {
 		setContentPane(contentPane);  
 	
 		layoutManager();
+		
+		Timer timer = new Timer(20, this);
+		timer.start();
+		newLevel = true;
+		
+		playGame();
 	}
 	
 	private void layoutManager() {
@@ -60,6 +72,35 @@ public class GameFrame extends JFrame {
 		
 	}
 	
+	public void playGame() {
+		gamePanel.playLevel();
+	}
+	
+	public void pauseGame() {
+		
+	}
+	
+	public void resumeGame() {
+		
+	}
+	
+	private void newLevel() {
+		String levelCount = (Integer.parseInt(topPanel.getLevelPanel()
+								   .getLevel()) + 1) + "";
+		
+		topPanel.getLevelPanel()
+				.setLevel(levelCount);
+		
+		topPanel.getTimerPanel()
+				.resetTimer();
+		
+		belowPanel.getPauseButton()
+				  .setMode(Mode.RESUME);
+		
+		gamePanel.resetLevel();
+		gamePanel.playLevel();
+	}
+	
 	public GamePanel getGamePanel() {
 		return this.gamePanel;
 	}
@@ -70,6 +111,13 @@ public class GameFrame extends JFrame {
 	
 	public BelowPanel getBelowPanel() {
 		return this.belowPanel;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (gamePanel.isTimeOver() && topPanel.getScorePanel().getLiveCount() > 0) {
+			newLevel();
+		}
 	}
 
 }

@@ -44,5 +44,9 @@ public class LevelPanel extends JPanel {
 		this.level = level;
 		rightLevelLabel.setText(level);		
 	}
+	
+	public String getLevel() {
+		return this.level;
+	}
 
 }

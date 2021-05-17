@@ -56,5 +56,13 @@ public class ScorePanel extends JPanel {
 	public void setScore(String score) {
 		this.score = score;
 	}
+	
+	public int getLiveCount() {
+		return this.liveCount;
+	}
+	
+	public String getScore() {
+		return this.score;
+	}
 
 }

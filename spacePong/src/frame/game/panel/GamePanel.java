@@ -2,6 +2,7 @@ package frame.game.panel;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -30,13 +31,16 @@ public class GamePanel extends JPanel
 	private final int PADDLE_HEIGHT = 10;
 	private final int paddlePositionY = 470;
 	private int paddlePositionX = 50;
-	private int paddleVelocity = 4;
+	private Rectangle paddle;
+	private int paddleVelocity = 5;
 	private ArrayList<PressedKey> pressedKeys;
 	private int pressedKeysLoc;
 	private int pressedKeysLocInt;
 	private boolean isValid;
 	private Ball ball;
 	private Meteor meteor;
+	private final double fullTime = 60.0;
+	private boolean timeIsOver;
 	
 	public GamePanel(GameFrame frame, TopPanel topPanel) {
 		this.frame = frame;
@@ -46,6 +50,7 @@ public class GamePanel extends JPanel
 		pressedKeys = new ArrayList<PressedKey>();
 		pressedKeysLoc = 0;
 		pressedKeysLocInt = 0;
+		timeIsOver = false;
 		
 		gameObjects = new ArrayList<GameObject>();
 		
@@ -56,7 +61,9 @@ public class GamePanel extends JPanel
 		ball = new Ball(this);
 		meteor = new Meteor(this);
 		timer = new Timer(20, this);
-		playGame();
+		paddle = new Rectangle(paddlePositionX, paddlePositionY, 
+				PADDLE_WIDTH, PADDLE_HEIGHT);
+		
 	}
 	
 	public void pauseGame() {
@@ -83,8 +90,30 @@ public class GamePanel extends JPanel
 		}
 	}
 	
-	public void playGame() {
+	public void playLevel() {
 		timer.start();
+	}
+	
+	public void resetLevel() {
+		timer.stop();
+		mode = Mode.PAUSE;
+		
+		pressedKeys = new ArrayList<PressedKey>();
+		pressedKeysLoc = 0;
+		pressedKeysLocInt = 0;
+		timeIsOver = false;
+		
+		gameObjects = new ArrayList<GameObject>();
+		
+		paddlePositionX = 50;
+		
+		ball = new Ball(this);
+		meteor = new Meteor(this);
+		timer = new Timer(20, this);
+		paddle = new Rectangle(paddlePositionX, paddlePositionY, 
+				PADDLE_WIDTH, PADDLE_HEIGHT);
+		
+		repaint();
 	}
 	
 	@Override
@@ -112,7 +141,7 @@ public class GamePanel extends JPanel
 			}
 			
 			if (isValid) {
-				if (pressedKeysLocInt < 5) {
+				if (pressedKeysLocInt < 4) {
 					if (pressedKeys.get(pressedKeysLoc) == PressedKey.LEFT){
 						paddlePositionX -= paddleVelocity;
 					} else {
@@ -128,9 +157,12 @@ public class GamePanel extends JPanel
 				pressedKeysLoc++;
 			}
 		}
-		
+
 		g.setColor(Color.BLACK);
 		g.fillRect(paddlePositionX, paddlePositionY, PADDLE_WIDTH, PADDLE_HEIGHT);
+		
+		paddle = new Rectangle(paddlePositionX, paddlePositionY, 
+				PADDLE_WIDTH, PADDLE_HEIGHT);
 	}
 	
 	private boolean isValidPosition(PressedKey e) {
@@ -147,8 +179,12 @@ public class GamePanel extends JPanel
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (GameObjectHelper.intersects(meteor, ball)) {
-			System.out.println("carpisti");
+			// mode = Mode.PAUSE;
+		}
+		
+		if (topPanel.getTimerPanel().getCurrentTime() >= fullTime) {
 			mode = Mode.PAUSE;
+			timeIsOver = true;
 		}
 		
 		if (mode == Mode.RESUME) {
@@ -192,5 +228,28 @@ public class GamePanel extends JPanel
 		int[] position = {paddlePositionX, paddlePositionY};
 		return position;
 	}
+
+	public Rectangle getPaddle() {
+		return paddle;
+	}
+
+	public void setPaddle(Rectangle paddle) {
+		this.paddle = paddle;
+	}
 	
+	public int getPaddleWidth() {
+		return this.PADDLE_WIDTH;
+	}
+	
+	public int getPaddleHeight() {
+		return this.PADDLE_HEIGHT;
+	}
+
+	public TopPanel getTopPanel() {
+		return topPanel;
+	}
+	
+	public boolean isTimeOver() {
+		return timeIsOver;
+	}
 }

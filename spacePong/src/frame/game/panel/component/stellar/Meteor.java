@@ -14,15 +14,10 @@ public class Meteor extends GameObject {
 	private GamePanel panel;
 	private Image meteorImage;
 	private BufferedImage meteorBuffImage;
-	private final int WIDTH = 80;
-	private final int HEIGHT = 80;
-	private int positionY;
-	private int positionX;
 	
 	public Meteor(GamePanel panel) {
+		super(340, 60, 80, 80);
 		this.panel = panel;
-		this.positionX = 340;
-		this.positionY = 60;
 		
 		try {
 			meteorBuffImage = ImageIO.read(new File("spacePong/assets/images/gameObjects/lava.png"));
@@ -31,13 +26,6 @@ public class Meteor extends GameObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		super.setPositionX(positionX);
-		super.setPositionY(positionY);
-		super.setHeight(HEIGHT);
-		super.setWidth(WIDTH);
-		
-		super.updateRectangle();
 	}
 	
 	public void randomLocation() {
@@ -82,14 +70,6 @@ public class Meteor extends GameObject {
 
 	public void setPositionX(int positionX) {
 		this.positionX = positionX;
-	}
-
-	public int getWIDTH() {
-		return WIDTH;
-	}
-
-	public int getHEIGHT() {
-		return HEIGHT;
 	}
 	
 }

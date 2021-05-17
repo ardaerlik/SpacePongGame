@@ -29,5 +29,29 @@ public class BelowPanel extends JPanel {
 		add(helpButton);
 		add(exitButton);
 	}
+
+	public PauseButton getPauseButton() {
+		return pauseButton;
+	}
+
+	public HelpButton getHelpButton() {
+		return helpButton;
+	}
+
+	public ExitButton getExitButton() {
+		return exitButton;
+	}
+
+	public void setPauseButton(PauseButton pauseButton) {
+		this.pauseButton = pauseButton;
+	}
+
+	public void setHelpButton(HelpButton helpButton) {
+		this.helpButton = helpButton;
+	}
+
+	public void setExitButton(ExitButton exitButton) {
+		this.exitButton = exitButton;
+	}
 	
 }

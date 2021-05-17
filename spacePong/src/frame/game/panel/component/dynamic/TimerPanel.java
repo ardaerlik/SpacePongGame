@@ -4,10 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
 import frame.game.GameFrame;
 
 public class TimerPanel extends JPanel implements ActionListener {
@@ -79,6 +77,10 @@ public class TimerPanel extends JPanel implements ActionListener {
 			degree += 25.0/1000.0*6.0;
 		}
 		repaint();	
+	}
+	
+	public double getCurrentTime() {
+		return degree / 6;
 	}
 
 }

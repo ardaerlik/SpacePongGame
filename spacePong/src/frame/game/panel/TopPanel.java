@@ -35,5 +35,13 @@ public class TopPanel extends JPanel {
 	public TimerPanel getTimerPanel() {
 		return this.timerPanel;
 	}
+	
+	public LevelPanel getLevelPanel() {
+		return this.levelPanel;
+	}
+	
+	public ScorePanel getScorePanel() {
+		return this.scorePanel;
+	}
 
 }

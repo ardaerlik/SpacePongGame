@@ -12,18 +12,14 @@ public class Ball extends GameObject {
 	private GamePanel panel;
 	private Image ballImage;
 	private BufferedImage ballBuffImage;
-	private final int WIDTH = 30;
-	private final int HEIGHT = 30;
 	private final double ACCELERATION = 0.25f;
 	private double velocityY;
 	private double velocityX;
-	private int positionY;
-	private int positionX;
 	
 	public Ball(GamePanel panel) {
+		super(10, 60, 30, 30);
 		this.panel = panel;
-		this.positionX = 10;
-		this.positionY = 60;
+
 		this.velocityY = 2;
 		this.velocityX = 4.5;
 		
@@ -34,11 +30,6 @@ public class Ball extends GameObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		super.setPositionX(positionX);
-		super.setPositionY(positionY);
-		super.setHeight(HEIGHT);
-		super.setWidth(WIDTH);
 	}
 	
 	public void move() {
@@ -64,9 +55,20 @@ public class Ball extends GameObject {
 			positionY = 0 - (int) velocityY;
 			velocityY = -velocityY;
 		}
+		
+		paddleForce();
 	}
 	
-	private void resetBall() {
+	private void paddleForce() {
+		if (GameObjectHelper.paddleIntersects(panel.getPaddle(), this)) {
+			int paddlePositionX = panel.getPaddlePosition()[0];
+			
+			velocityY = -velocityY+1;
+			velocityX += (positionX + width/2 - (paddlePositionX + panel.getPaddle().width/2))/10;
+		}
+	}
+	
+	public void resetBall() {
 		this.positionX = 10;
 		this.positionY = 60;
 		this.velocityY = 2;
@@ -75,14 +77,6 @@ public class Ball extends GameObject {
 	
 	public Image getImage() {
 		return this.ballImage;
-	}
-	
-	public int getWidth() {
-		return this.WIDTH;
-	}
-	
-	public int getHeight() {
-		return this.HEIGHT;
 	}
 	
 	public double getVelocityY() {

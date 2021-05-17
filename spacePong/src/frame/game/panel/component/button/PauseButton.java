@@ -30,6 +30,25 @@ public class PauseButton extends JButton {
 		return this.mode;
 	}
 	
+	public void setMode(Mode mode) {
+		this.mode = mode;
+		
+		switch (mode) {
+			case PAUSE:
+				frame.getGamePanel().resumeGame();
+				setToolTipText("Click this button to pause game");
+				setIcon(new ImageIcon("spacePong/assets/images/gameButtons/pause.png"));
+				mode = Mode.RESUME;
+				break;
+			case RESUME:
+				frame.getGamePanel().pauseGame();
+				setToolTipText("Click this button to resume game");
+				setIcon(new ImageIcon("spacePong/assets/images/gameButtons/resume.png"));
+				mode = Mode.PAUSE;
+				break;
+		}
+	}
+	
 	private class Handler implements ActionListener {
 
 		@Override
