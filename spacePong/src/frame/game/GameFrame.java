@@ -17,7 +17,7 @@ public class GameFrame extends JFrame
 	private TopPanel topPanel;
 	private GamePanel gamePanel;
 	private BelowPanel belowPanel;
-	private boolean newLevel;
+	private Timer timer;
 
 	public GameFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,9 +29,8 @@ public class GameFrame extends JFrame
 	
 		layoutManager();
 		
-		Timer timer = new Timer(20, this);
+		timer = new Timer(20, this);
 		timer.start();
-		newLevel = true;
 		
 		playGame();
 	}
@@ -77,11 +76,11 @@ public class GameFrame extends JFrame
 	}
 	
 	public void pauseGame() {
-		
+		gamePanel.pauseGame();
 	}
 	
 	public void resumeGame() {
-		
+		gamePanel.resumeGame();
 	}
 	
 	private void newLevel() {

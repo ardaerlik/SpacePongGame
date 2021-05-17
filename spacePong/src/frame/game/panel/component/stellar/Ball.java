@@ -17,7 +17,7 @@ public class Ball extends GameObject {
 	private double velocityX;
 	
 	public Ball(GamePanel panel) {
-		super(10, 60, 30, 30);
+		super(10, 60, 30, 30, ObjectMode.BALL);
 		this.panel = panel;
 
 		this.velocityY = 2;
@@ -74,41 +74,49 @@ public class Ball extends GameObject {
 		this.velocityY = 2;
 		this.velocityX = 4.5;
 	}
-	
-	public Image getImage() {
-		return this.ballImage;
+
+	public GamePanel getPanel() {
+		return panel;
 	}
-	
+
+	public Image getBallImage() {
+		return ballImage;
+	}
+
+	public BufferedImage getBallBuffImage() {
+		return ballBuffImage;
+	}
+
+	public double getACCELERATION() {
+		return ACCELERATION;
+	}
+
 	public double getVelocityY() {
-		return this.velocityY;
+		return velocityY;
 	}
-	
+
 	public double getVelocityX() {
-		return this.velocityX;
+		return velocityX;
 	}
-	
-	public int getPositionY() {
-		return this.positionY;
+
+	public void setPanel(GamePanel panel) {
+		this.panel = panel;
 	}
-	
-	public int getPositionX() {
-		return this.positionX;
+
+	public void setBallImage(Image ballImage) {
+		this.ballImage = ballImage;
 	}
-	
-	public void setVelocityY(int velocityY) {
+
+	public void setBallBuffImage(BufferedImage ballBuffImage) {
+		this.ballBuffImage = ballBuffImage;
+	}
+
+	public void setVelocityY(double velocityY) {
 		this.velocityY = velocityY;
 	}
-	
-	public void setVelocityX(int velocityX) {
+
+	public void setVelocityX(double velocityX) {
 		this.velocityX = velocityX;
-	}
-	
-	public void setPositionY(int positionY) {
-		this.positionY = positionY;
-	}
-	
-	public void setPositionX(int positionX) {
-		this.positionX = positionX;
 	}
 
 }
