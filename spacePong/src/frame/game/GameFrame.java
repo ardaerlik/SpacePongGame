@@ -75,6 +75,10 @@ public class GameFrame extends JFrame
 		gamePanel.playLevel();
 	}
 	
+	public void finishGame() {
+		System.out.println("oyun bitti");
+	}
+	
 	public void pauseGame() {
 		gamePanel.pauseGame();
 	}
@@ -97,6 +101,8 @@ public class GameFrame extends JFrame
 				  .setMode(Mode.RESUME);
 		
 		gamePanel.resetLevel();
+		
+
 		gamePanel.playLevel();
 	}
 	
@@ -113,9 +119,13 @@ public class GameFrame extends JFrame
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (gamePanel.isTimeOver() && topPanel.getScorePanel().getLiveCount() > 0) {
+	public void actionPerformed(ActionEvent e) {		
+		if (gamePanel.isTimeIsOver() && topPanel.getScorePanel().getLiveCount() > 0) {
 			newLevel();
+		}
+		
+		if (topPanel.getScorePanel().getLiveCount() == 0) {
+			finishGame();
 		}
 	}
 

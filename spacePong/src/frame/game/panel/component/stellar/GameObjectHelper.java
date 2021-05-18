@@ -1,6 +1,7 @@
 package frame.game.panel.component.stellar;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 public class GameObjectHelper {
 	
@@ -41,6 +42,10 @@ public class GameObjectHelper {
 		} else {
 			return false;
 		}
+	}
+	
+	public static boolean intersectsAny(ArrayList<GameObject> gameObjects) {
+		return false;
 	}
 	
 }

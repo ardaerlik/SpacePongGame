@@ -1,17 +1,23 @@
 package frame.game.panel.component.stellar;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
+
 import frame.game.panel.GamePanel;
 
-public class Ufo extends GameObject {
+public class Ufo extends GameObject 
+	implements ActionListener {
 	
 	private GamePanel panel;
 	private Image ufoImage;
 	private BufferedImage ufoBuffImage;
+	private Timer timer;
 	
 	public Ufo(GamePanel panel) {
 		super(0, 0, 90, 67, ObjectMode.UFO);
@@ -23,7 +29,32 @@ public class Ufo extends GameObject {
 			this.ufoImage = ufoBuffImage.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			timer = new Timer(20, this);
 		}
+	}
+	
+	public void action() {
+		int oldLiveCount = panel.getTopPanel()
+								.getScorePanel()
+								.getLiveCount();
+		
+		panel.getTopPanel()
+			 .getScorePanel()
+			 .setLiveCount(oldLiveCount-1);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("ufo calisiyor");
+	}
+	
+	public void startAction() {
+		timer.start();
+	}
+	
+	public void stopAction() {
+		timer.stop();
 	}
 
 	public GamePanel getPanel() {

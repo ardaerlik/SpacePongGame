@@ -1,17 +1,23 @@
 package frame.game.panel.component.stellar;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
+
 import frame.game.panel.GamePanel;
 
-public class Star extends GameObject {
+public class Star extends GameObject 
+	implements ActionListener {
 	
 	private GamePanel panel;
 	private Image starImage;
 	private BufferedImage starBuffImage;
+	private Timer timer;
 	
 	public Star(GamePanel panel) {
 		super(0, 0, 85, 81, ObjectMode.STAR);
@@ -23,9 +29,35 @@ public class Star extends GameObject {
 			this.starImage = starBuffImage.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 			e.printStackTrace();
+			timer = new Timer(20, this);
 		}
 	}
-
+	
+	public void action() {
+		int oldScore = Integer.parseInt(panel.getTopPanel()
+											 .getScorePanel()
+											 .getScore());
+		
+		String newScore = (oldScore + 10) + "";
+		
+		panel.getTopPanel()
+			 .getScorePanel()
+			 .setScore(newScore);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		;
+	}
+	
+	public void startAction() {
+		timer.start();
+	}
+	
+	public void stopAction() {
+		timer.stop();
+	}
+	
 	public GamePanel getPanel() {
 		return panel;
 	}

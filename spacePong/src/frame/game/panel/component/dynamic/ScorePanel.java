@@ -55,6 +55,7 @@ public class ScorePanel extends JPanel {
 	
 	public void setScore(String score) {
 		this.score = score;
+		scoreLabel.setText(score);
 	}
 	
 	public int getLiveCount() {

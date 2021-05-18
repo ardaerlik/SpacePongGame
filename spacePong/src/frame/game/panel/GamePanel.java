@@ -216,40 +216,145 @@ public class GamePanel extends JPanel
 	@Override
 	public void keyTyped(KeyEvent e) {}
 	
-	public void setPaddleVelocity(int paddleVelocity) {
-		this.paddleVelocity = paddleVelocity;
-	}
-	
-	public int getPaddleVelocity() {
-		return this.paddleVelocity;
-	}
-	
 	public int[] getPaddlePosition() {
 		int[] position = {paddlePositionX, paddlePositionY};
 		return position;
+	}
+
+	public ArrayList<GameObject> getGameObjects() {
+		return gameObjects;
+	}
+
+	public GameFrame getFrame() {
+		return frame;
+	}
+
+	public TopPanel getTopPanel() {
+		return topPanel;
+	}
+
+	public Mode getMode() {
+		return mode;
+	}
+
+	public Timer getTimer() {
+		return timer;
+	}
+
+	public int getPADDLE_WIDTH() {
+		return PADDLE_WIDTH;
+	}
+
+	public int getPADDLE_HEIGHT() {
+		return PADDLE_HEIGHT;
+	}
+
+	public int getPaddlePositionY() {
+		return paddlePositionY;
+	}
+
+	public int getPaddlePositionX() {
+		return paddlePositionX;
 	}
 
 	public Rectangle getPaddle() {
 		return paddle;
 	}
 
+	public int getPaddleVelocity() {
+		return paddleVelocity;
+	}
+
+	public ArrayList<PressedKey> getPressedKeys() {
+		return pressedKeys;
+	}
+
+	public int getPressedKeysLoc() {
+		return pressedKeysLoc;
+	}
+
+	public int getPressedKeysLocInt() {
+		return pressedKeysLocInt;
+	}
+
+	public boolean isValid() {
+		return isValid;
+	}
+
+	public Ball getBall() {
+		return ball;
+	}
+
+	public Meteor getMeteor() {
+		return meteor;
+	}
+
+	public double getFullTime() {
+		return fullTime;
+	}
+
+	public boolean isTimeIsOver() {
+		return timeIsOver;
+	}
+
+	public void setGameObjects(ArrayList<GameObject> gameObjects) {
+		this.gameObjects = gameObjects;
+	}
+
+	public void setFrame(GameFrame frame) {
+		this.frame = frame;
+	}
+
+	public void setTopPanel(TopPanel topPanel) {
+		this.topPanel = topPanel;
+	}
+
+	public void setMode(Mode mode) {
+		this.mode = mode;
+	}
+
+	public void setTimer(Timer timer) {
+		this.timer = timer;
+	}
+
+	public void setPaddlePositionX(int paddlePositionX) {
+		this.paddlePositionX = paddlePositionX;
+	}
+
 	public void setPaddle(Rectangle paddle) {
 		this.paddle = paddle;
 	}
-	
-	public int getPaddleWidth() {
-		return this.PADDLE_WIDTH;
-	}
-	
-	public int getPaddleHeight() {
-		return this.PADDLE_HEIGHT;
+
+	public void setPaddleVelocity(int paddleVelocity) {
+		this.paddleVelocity = paddleVelocity;
 	}
 
-	public TopPanel getTopPanel() {
-		return topPanel;
+	public void setPressedKeys(ArrayList<PressedKey> pressedKeys) {
+		this.pressedKeys = pressedKeys;
+	}
+
+	public void setPressedKeysLoc(int pressedKeysLoc) {
+		this.pressedKeysLoc = pressedKeysLoc;
+	}
+
+	public void setPressedKeysLocInt(int pressedKeysLocInt) {
+		this.pressedKeysLocInt = pressedKeysLocInt;
+	}
+
+	public void setValid(boolean isValid) {
+		this.isValid = isValid;
+	}
+
+	public void setBall(Ball ball) {
+		this.ball = ball;
+	}
+
+	public void setMeteor(Meteor meteor) {
+		this.meteor = meteor;
+	}
+
+	public void setTimeIsOver(boolean timeIsOver) {
+		this.timeIsOver = timeIsOver;
 	}
 	
-	public boolean isTimeOver() {
-		return timeIsOver;
-	}
 }
