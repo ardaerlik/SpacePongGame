@@ -7,8 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.Timer;
-
 import frame.game.panel.GamePanel;
 
 public class Ufo extends GameObject 
@@ -17,6 +15,12 @@ public class Ufo extends GameObject
 	private GamePanel panel;
 	private Image ufoImage;
 	private BufferedImage ufoBuffImage;
+	private final double scaleFactor = 1.1;
+	private final int minWidth = 90;
+	private final int minHeight = 67;
+	private final int maxWidth = 145;
+	private final int maxHeight = 101;
+	private boolean scalingUp = true;
 	
 	public Ufo(GamePanel panel) {
 		super(0, 0, 90, 67, ObjectMode.UFO);
@@ -44,7 +48,31 @@ public class Ufo extends GameObject
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		;
+		scaleControl();
+		scale();
+	}
+	
+	private void scaleControl() {
+		if (scalingUp) {
+			if ((getWidth()*scaleFactor) > maxWidth) {
+				scalingUp = false;
+			} else {
+				setWidth((int) (getWidth()*scaleFactor));
+				setHeight((int) (getHeight()*scaleFactor));
+			}
+		} else {
+			if ((getWidth()/scaleFactor) < minWidth) {
+				scalingUp = true;
+			} else {
+				setWidth((int) (getWidth()/scaleFactor));
+				setHeight((int) (getHeight()/scaleFactor));
+			}
+		}
+	}
+	
+	private void scale() {
+		updateRectangle();
+		setImage(buffImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH));
 	}
 
 	public GamePanel getPanel() {
@@ -59,6 +87,30 @@ public class Ufo extends GameObject
 		return ufoBuffImage;
 	}
 
+	public double getScaleFactor() {
+		return scaleFactor;
+	}
+
+	public int getMinWidth() {
+		return minWidth;
+	}
+
+	public int getMinHeight() {
+		return minHeight;
+	}
+
+	public int getMaxWidth() {
+		return maxWidth;
+	}
+
+	public int getMaxHeight() {
+		return maxHeight;
+	}
+
+	public boolean isScalingUp() {
+		return scalingUp;
+	}
+
 	public void setPanel(GamePanel panel) {
 		this.panel = panel;
 	}
@@ -69,6 +121,10 @@ public class Ufo extends GameObject
 
 	public void setUfoBuffImage(BufferedImage ufoBuffImage) {
 		this.ufoBuffImage = ufoBuffImage;
+	}
+
+	public void setScalingUp(boolean scalingUp) {
+		this.scalingUp = scalingUp;
 	}
 
 }

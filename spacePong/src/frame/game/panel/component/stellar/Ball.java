@@ -31,6 +31,7 @@ public class Ball extends GameObject
 			ballBuffImage = ImageIO.read(new File("spacePong/assets/images/gameObjects/ball.png"));
 			super.setBuffImage(ballBuffImage);
 			this.ballImage = ballBuffImage.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
+			super.setImage(ballBuffImage);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

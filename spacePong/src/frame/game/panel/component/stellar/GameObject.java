@@ -10,7 +10,8 @@ import javax.swing.Timer;
 public abstract class GameObject 
 	implements ActionListener {
 	
-	protected BufferedImage image;
+	protected BufferedImage buffImage;
+	protected Image image;
 	protected Rectangle rectangle;
 	protected ObjectMode objectMode;
 	protected Timer timer;
@@ -27,7 +28,7 @@ public abstract class GameObject
 		this.width = width;
 		this.height = height;
 		this.objectMode = objectMode;
-		
+				
 		timer = new Timer(20, this);
 		timer.start();
 		
@@ -49,12 +50,11 @@ public abstract class GameObject
 	}
 	
 	public Image getImage() {
-		Image normalImg = image.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
-		return normalImg;
+		return image;
 	}
 	
 	public BufferedImage getBuffImage() {
-		return image;
+		return buffImage;
 	}
 
 	public Rectangle getRectangle() {
@@ -80,9 +80,13 @@ public abstract class GameObject
 	public int getHeight() {
 		return height;
 	}
-
-	public void setBuffImage(BufferedImage image) {
+	
+	public void setImage(Image image) {
 		this.image = image;
+	}
+
+	public void setBuffImage(BufferedImage buffImage) {
+		this.buffImage = buffImage;
 	}
 
 	public void setRectangle(Rectangle rectangle) {

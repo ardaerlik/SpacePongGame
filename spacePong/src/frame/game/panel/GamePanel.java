@@ -17,6 +17,7 @@ import frame.game.panel.component.stellar.Ball;
 import frame.game.panel.component.stellar.GameObject;
 import frame.game.panel.component.stellar.GameObjectHelper;
 import frame.game.panel.component.stellar.Meteor;
+import frame.game.panel.component.stellar.Star;
 
 public class GamePanel extends JPanel 
 	implements ActionListener, KeyListener {
@@ -39,6 +40,7 @@ public class GamePanel extends JPanel
 	private boolean isValid;
 	private Ball ball;
 	private Meteor meteor;
+	private Star star;
 	private final double fullTime = 60.0;
 	private boolean timeIsOver;
 	
@@ -60,17 +62,22 @@ public class GamePanel extends JPanel
 		
 		ball = new Ball(this);
 		meteor = new Meteor(this);
+		star = new Star(this);
 		timer = new Timer(20, this);
 		paddle = new Rectangle(paddlePositionX, paddlePositionY, 
 				PADDLE_WIDTH, PADDLE_HEIGHT);
 		
+		star.setPositionX(480);
+		star.setPositionY(60);
 		gameObjects.add(meteor);
+		gameObjects.add(star);
 	}
 	
 	public void pauseGame() {
 		switch (mode) {
 			case RESUME:
 				topPanel.getTimerPanel().pauseTimer();
+				pauseAllObjects();
 				topPanel.getTimerPanel().requestFocusInWindow();
 				requestFocusInWindow();
 				mode = Mode.PAUSE;
@@ -84,12 +91,25 @@ public class GamePanel extends JPanel
 		switch (mode) {
 			case PAUSE:
 				topPanel.getTimerPanel().startTimer();
+				resumeAllObjects();
 				topPanel.getTimerPanel().requestFocusInWindow();
 				requestFocusInWindow();
 				mode = Mode.RESUME;
 				break;
 			case RESUME:
 				break;
+		}
+	}
+	
+	private void pauseAllObjects() {
+		for (int i=0; i<gameObjects.size(); i++) {
+			gameObjects.get(i).stopAction();
+		}
+	}
+	
+	private void resumeAllObjects() {
+		for (int i=0; i<gameObjects.size(); i++) {
+			gameObjects.get(i).startAction();
 		}
 	}
 	
@@ -134,6 +154,7 @@ public class GamePanel extends JPanel
 	
 	private void paintObjects(Graphics g) {
 		g.drawImage(meteor.getImage(), meteor.getPositionX(), meteor.getPositionY(), null);
+		g.drawImage(star.getImage(), star.getPositionX(), star.getPositionY(), null);
 	}
 	
 	private void smoothPaddle(Graphics g) {
@@ -287,11 +308,7 @@ public class GamePanel extends JPanel
 	public Ball getBall() {
 		return ball;
 	}
-
-	public Meteor getMeteor() {
-		return meteor;
-	}
-
+	
 	public double getFullTime() {
 		return fullTime;
 	}
@@ -350,10 +367,6 @@ public class GamePanel extends JPanel
 
 	public void setBall(Ball ball) {
 		this.ball = ball;
-	}
-
-	public void setMeteor(Meteor meteor) {
-		this.meteor = meteor;
 	}
 
 	public void setTimeIsOver(boolean timeIsOver) {

@@ -22,12 +22,13 @@ public class Star extends GameObject
 	public Star(GamePanel panel) {
 		super(0, 0, 85, 81, ObjectMode.STAR);
 		this.panel = panel;
-		this.velocityY = 10;
+		this.velocityY = 2;
 		
 		try {
 			starBuffImage = ImageIO.read(new File("spacePong/assets/images/gameObjects/star.png"));
 			super.setBuffImage(starBuffImage);
 			this.starImage = starBuffImage.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
+			super.setImage(starBuffImage);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -48,11 +49,21 @@ public class Star extends GameObject
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		;
+		move();
 	}
 	
 	private void move() {
-		
+		if (moveController()) {
+			super.positionY += velocityY;
+		}
+	}
+	
+	private boolean moveController() {
+		if ((getPositionY() + velocityY) < panel.getHeight()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public GamePanel getPanel() {

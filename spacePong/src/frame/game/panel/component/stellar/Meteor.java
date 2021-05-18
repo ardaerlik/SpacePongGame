@@ -33,6 +33,7 @@ public class Meteor extends GameObject
 			meteorBuffImage = ImageIO.read(new File("spacePong/assets/images/gameObjects/lava.png"));
 			super.setBuffImage(meteorBuffImage);
 			this.meteorImage = meteorBuffImage.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
+			super.setImage(meteorBuffImage);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
