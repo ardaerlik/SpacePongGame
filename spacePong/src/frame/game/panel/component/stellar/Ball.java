@@ -1,13 +1,16 @@
 package frame.game.panel.component.stellar;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import frame.game.panel.GamePanel;
 
-public class Ball extends GameObject {
+public class Ball extends GameObject 
+	implements ActionListener {
 	
 	private GamePanel panel;
 	private Image ballImage;
@@ -21,7 +24,6 @@ public class Ball extends GameObject {
 	public Ball(GamePanel panel) {
 		super(10, 60, 30, 30, ObjectMode.BALL);
 		this.panel = panel;
-
 		this.velocityY = 2;
 		this.velocityX = 4.5;
 		
@@ -34,7 +36,11 @@ public class Ball extends GameObject {
 		}
 	}
 	
+	@Override
 	public void action() {}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {}
 	
 	public void move() {
 		moveController();

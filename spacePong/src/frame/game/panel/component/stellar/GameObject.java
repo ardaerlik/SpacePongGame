@@ -2,20 +2,25 @@ package frame.game.panel.component.stellar;
 
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-public abstract class GameObject {
+import javax.swing.Timer;
+
+public abstract class GameObject 
+	implements ActionListener {
 	
 	protected BufferedImage image;
 	protected Rectangle rectangle;
 	protected ObjectMode objectMode;
+	protected Timer timer;
 	protected int positionX;
 	protected int positionY;
 	protected int width;
 	protected int height;
 	
 	public GameObject(int positionX, int positionY, 
-			int width, int height, ObjectMode objectMode) {
+		int width, int height, ObjectMode objectMode) {
 		
 		this.positionX = positionX;
 		this.positionY = positionY;
@@ -23,10 +28,21 @@ public abstract class GameObject {
 		this.height = height;
 		this.objectMode = objectMode;
 		
+		timer = new Timer(20, this);
+		timer.start();
+		
 		updateRectangle();
 	}
 	
 	public abstract void action();
+	
+	public void startAction() {
+		timer.start();
+	}
+	
+	public void stopAction() {
+		timer.stop();
+	}
 	
 	protected void updateRectangle() {
 		rectangle = new Rectangle(positionX, positionY, width, height);

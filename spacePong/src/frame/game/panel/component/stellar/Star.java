@@ -17,11 +17,12 @@ public class Star extends GameObject
 	private GamePanel panel;
 	private Image starImage;
 	private BufferedImage starBuffImage;
-	private Timer timer;
+	private double velocityY;
 	
 	public Star(GamePanel panel) {
 		super(0, 0, 85, 81, ObjectMode.STAR);
 		this.panel = panel;
+		this.velocityY = 10;
 		
 		try {
 			starBuffImage = ImageIO.read(new File("spacePong/assets/images/gameObjects/star.png"));
@@ -29,10 +30,10 @@ public class Star extends GameObject
 			this.starImage = starBuffImage.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 			e.printStackTrace();
-			timer = new Timer(20, this);
 		}
 	}
 	
+	@Override
 	public void action() {
 		int oldScore = Integer.parseInt(panel.getTopPanel()
 											 .getScorePanel()
@@ -50,12 +51,8 @@ public class Star extends GameObject
 		;
 	}
 	
-	public void startAction() {
-		timer.start();
-	}
-	
-	public void stopAction() {
-		timer.stop();
+	private void move() {
+		
 	}
 	
 	public GamePanel getPanel() {

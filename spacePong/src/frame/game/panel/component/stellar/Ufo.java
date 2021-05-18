@@ -17,7 +17,6 @@ public class Ufo extends GameObject
 	private GamePanel panel;
 	private Image ufoImage;
 	private BufferedImage ufoBuffImage;
-	private Timer timer;
 	
 	public Ufo(GamePanel panel) {
 		super(0, 0, 90, 67, ObjectMode.UFO);
@@ -29,11 +28,10 @@ public class Ufo extends GameObject
 			this.ufoImage = ufoBuffImage.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			timer = new Timer(20, this);
 		}
 	}
 	
+	@Override
 	public void action() {
 		int oldLiveCount = panel.getTopPanel()
 								.getScorePanel()
@@ -46,15 +44,7 @@ public class Ufo extends GameObject
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("ufo calisiyor");
-	}
-	
-	public void startAction() {
-		timer.start();
-	}
-	
-	public void stopAction() {
-		timer.stop();
+		;
 	}
 
 	public GamePanel getPanel() {

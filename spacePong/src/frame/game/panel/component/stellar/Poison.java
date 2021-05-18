@@ -1,13 +1,16 @@
 package frame.game.panel.component.stellar;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import frame.game.panel.GamePanel;
 
-public class Poison extends GameObject {
+public class Poison extends GameObject 
+	implements ActionListener {
 	
 	private GamePanel panel;
 	private Image poisonImage;
@@ -26,7 +29,11 @@ public class Poison extends GameObject {
 		}
 	}
 
+	@Override
 	public void action() {}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {}
 	
 	public GamePanel getPanel() {
 		return panel;
