@@ -59,6 +59,12 @@ public class GameObjectHelper {
 		return false;
 	}
 	
+	public static ArrayList<GameObject> generateObjects(int count){
+		ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+		
+		return gameObjects;
+	}
+	
 	public static void actionIntersectedObject(GameObject gameObject) {
 		gameObject.action();
 	}

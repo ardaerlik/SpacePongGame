@@ -55,6 +55,8 @@ public class Star extends GameObject
 	private void move() {
 		if (moveController()) {
 			super.positionY += velocityY;
+		} else {
+			super.timer.stop();
 		}
 	}
 	

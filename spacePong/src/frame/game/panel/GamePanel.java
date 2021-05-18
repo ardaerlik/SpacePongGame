@@ -18,6 +18,7 @@ import frame.game.panel.component.stellar.GameObject;
 import frame.game.panel.component.stellar.GameObjectHelper;
 import frame.game.panel.component.stellar.Meteor;
 import frame.game.panel.component.stellar.Star;
+import frame.game.panel.component.stellar.Ufo;
 
 public class GamePanel extends JPanel 
 	implements ActionListener, KeyListener {
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel
 	private Ball ball;
 	private Meteor meteor;
 	private Star star;
+	private Ufo ufo;
 	private final double fullTime = 60.0;
 	private boolean timeIsOver;
 	
@@ -63,14 +65,18 @@ public class GamePanel extends JPanel
 		ball = new Ball(this);
 		meteor = new Meteor(this);
 		star = new Star(this);
+		ufo = new Ufo(this);
 		timer = new Timer(20, this);
 		paddle = new Rectangle(paddlePositionX, paddlePositionY, 
 				PADDLE_WIDTH, PADDLE_HEIGHT);
 		
 		star.setPositionX(480);
 		star.setPositionY(60);
+		ufo.setPositionX(540);
+		ufo.setPositionY(60);
 		gameObjects.add(meteor);
 		gameObjects.add(star);
+		gameObjects.add(ufo);
 	}
 	
 	public void pauseGame() {
@@ -153,8 +159,11 @@ public class GamePanel extends JPanel
 	}
 	
 	private void paintObjects(Graphics g) {
-		g.drawImage(meteor.getImage(), meteor.getPositionX(), meteor.getPositionY(), null);
-		g.drawImage(star.getImage(), star.getPositionX(), star.getPositionY(), null);
+		for (int i=0; i<gameObjects.size(); i++) {
+			g.drawImage(gameObjects.get(i).getImage(), 
+					gameObjects.get(i).getPositionX(), 
+					gameObjects.get(i).getPositionY(), null);
+		}
 	}
 	
 	private void smoothPaddle(Graphics g) {

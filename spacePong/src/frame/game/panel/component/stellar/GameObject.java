@@ -30,8 +30,7 @@ public abstract class GameObject
 		this.objectMode = objectMode;
 				
 		timer = new Timer(20, this);
-		timer.start();
-		
+
 		updateRectangle();
 	}
 	
@@ -81,6 +80,10 @@ public abstract class GameObject
 		return height;
 	}
 	
+	protected Timer getTimer() {
+		return timer;
+	}
+	
 	public void setImage(Image image) {
 		this.image = image;
 	}
@@ -111,6 +114,10 @@ public abstract class GameObject
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+	protected void setTimer(Timer timer) {
+		this.timer = timer;
 	}
 	
 }
