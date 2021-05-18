@@ -64,12 +64,14 @@ public class GamePanel extends JPanel
 		paddle = new Rectangle(paddlePositionX, paddlePositionY, 
 				PADDLE_WIDTH, PADDLE_HEIGHT);
 		
+		gameObjects.add(meteor);
 	}
 	
 	public void pauseGame() {
 		switch (mode) {
 			case RESUME:
 				topPanel.getTimerPanel().pauseTimer();
+				topPanel.getTimerPanel().requestFocusInWindow();
 				requestFocusInWindow();
 				mode = Mode.PAUSE;
 				break;
@@ -82,6 +84,7 @@ public class GamePanel extends JPanel
 		switch (mode) {
 			case PAUSE:
 				topPanel.getTimerPanel().startTimer();
+				topPanel.getTimerPanel().requestFocusInWindow();
 				requestFocusInWindow();
 				mode = Mode.RESUME;
 				break;
@@ -178,8 +181,8 @@ public class GamePanel extends JPanel
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (GameObjectHelper.intersects(meteor, ball)) {
-			// mode = Mode.PAUSE;
+		if (GameObjectHelper.intersectsAny(ball, gameObjects)) {
+			mode = Mode.PAUSE;
 		}
 		
 		if (topPanel.getTimerPanel().getCurrentTime() >= fullTime) {

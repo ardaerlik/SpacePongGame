@@ -37,6 +37,8 @@ public class TimerPanel extends JPanel implements ActionListener {
 	public void resetTimer() {
 		pauseTimer();
 		degree = 0;
+		
+		repaint();
 	}
 	
 	private void rushTimer(Graphics g) {

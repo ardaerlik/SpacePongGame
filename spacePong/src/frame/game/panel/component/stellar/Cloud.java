@@ -25,7 +25,9 @@ public class Cloud extends GameObject {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void action() {}
+	
 	public GamePanel getPanel() {
 		return panel;
 	}

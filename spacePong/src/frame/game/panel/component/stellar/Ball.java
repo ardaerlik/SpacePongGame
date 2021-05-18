@@ -13,6 +13,8 @@ public class Ball extends GameObject {
 	private Image ballImage;
 	private BufferedImage ballBuffImage;
 	private final double ACCELERATION = 0.25f;
+	private final double INNITIAL_VY = 2;
+	private final double INNITIAL_VX = 4.5;
 	private double velocityY;
 	private double velocityX;
 	
@@ -31,6 +33,8 @@ public class Ball extends GameObject {
 			e.printStackTrace();
 		}
 	}
+	
+	public void action() {}
 	
 	public void move() {
 		moveController();
@@ -97,6 +101,14 @@ public class Ball extends GameObject {
 
 	public double getVelocityX() {
 		return velocityX;
+	}
+	
+	public double getINNITIAL_VY() {
+		return INNITIAL_VY;
+	}
+
+	public double getINNITIAL_VX() {
+		return INNITIAL_VX;
 	}
 
 	public void setPanel(GamePanel panel) {

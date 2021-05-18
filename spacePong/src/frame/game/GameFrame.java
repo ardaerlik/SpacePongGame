@@ -30,9 +30,6 @@ public class GameFrame extends JFrame
 		layoutManager();
 		
 		timer = new Timer(20, this);
-		timer.start();
-		
-		playGame();
 	}
 	
 	private void layoutManager() {
@@ -72,6 +69,7 @@ public class GameFrame extends JFrame
 	}
 	
 	public void playGame() {
+		timer.start();
 		gamePanel.playLevel();
 	}
 	
@@ -89,21 +87,30 @@ public class GameFrame extends JFrame
 	
 	private void newLevel() {
 		String levelCount = (Integer.parseInt(topPanel.getLevelPanel()
-								   .getLevel()) + 1) + "";
+								    .getLevel()) + 1) + "";
+		
+		String scoreCount = (Integer.parseInt(topPanel.getScorePanel()
+								    .getScore()) + 50) + "";
+		
+		int liveCount = topPanel.getScorePanel()
+								.getLiveCount();
 		
 		topPanel.getLevelPanel()
 				.setLevel(levelCount);
 		
+		topPanel.getScorePanel()
+				.setScore(scoreCount);
+		
+		topPanel.getScorePanel()
+				.setLiveCount(liveCount);
+		
 		topPanel.getTimerPanel()
 				.resetTimer();
 		
-		belowPanel.getPauseButton()
-				  .setMode(Mode.RESUME);
-		
 		gamePanel.resetLevel();
-		
 
 		gamePanel.playLevel();
+		gamePanel.resumeGame();
 	}
 	
 	public GamePanel getGamePanel() {

@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-public class GameObject {
+public abstract class GameObject {
 	
 	protected BufferedImage image;
 	protected Rectangle rectangle;
@@ -25,6 +25,8 @@ public class GameObject {
 		
 		updateRectangle();
 	}
+	
+	public abstract void action();
 	
 	protected void updateRectangle() {
 		rectangle = new Rectangle(positionX, positionY, width, height);

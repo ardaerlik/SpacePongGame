@@ -44,7 +44,14 @@ public class GameObjectHelper {
 		}
 	}
 	
-	public static boolean intersectsAny(ArrayList<GameObject> gameObjects) {
+	public static boolean intersectsAny(Ball ball, ArrayList<GameObject> gameObjects) {
+		for (int i=0; i<gameObjects.size(); i++) {
+			if (intersects(ball, gameObjects.get(i))) {
+				System.out.println("deneme");
+				return true;
+			}
+		}
+		
 		return false;
 	}
 	

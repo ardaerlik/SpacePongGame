@@ -26,6 +26,8 @@ public class Money extends GameObject {
 		}
 	}
 
+	public void action() {}
+	
 	public GamePanel getPanel() {
 		return panel;
 	}
