@@ -182,7 +182,7 @@ public class GamePanel extends JPanel
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (GameObjectHelper.intersectsAny(ball, gameObjects)) {
-			mode = Mode.PAUSE;
+			//mode = Mode.PAUSE;
 		}
 		
 		if (topPanel.getTimerPanel().getCurrentTime() >= fullTime) {

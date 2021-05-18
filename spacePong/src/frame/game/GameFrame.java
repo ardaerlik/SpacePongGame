@@ -108,7 +108,15 @@ public class GameFrame extends JFrame
 				.resetTimer();
 		
 		gamePanel.resetLevel();
-
+		
+		gamePanel.getBall()
+			     .setVelocityX(gamePanel.getBall()
+			    		 				.getVelocityX()*1.2);
+		
+		gamePanel.getBall()
+	     		 .setVelocityY(gamePanel.getBall()
+	    		 				        .getVelocityY()*1.2);
+		
 		gamePanel.playLevel();
 		gamePanel.resumeGame();
 	}
