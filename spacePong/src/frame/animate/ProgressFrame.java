@@ -6,6 +6,8 @@ import javax.swing.SpringLayout;
 
 import frame.animate.panel.LabelPanel;
 import frame.animate.panel.MainPanel;
+import frame.game.GameTheme;
+
 import java.awt.Color;
 
 public class ProgressFrame extends JFrame {
@@ -27,9 +29,9 @@ public class ProgressFrame extends JFrame {
 	}
 	
 	private void layoutManager() {
-		mainPanel = new MainPanel();
-		labelPanel1 = new LabelPanel();
-		labelPanel2 = new LabelPanel();
+		mainPanel = new MainPanel(this);
+		labelPanel1 = new LabelPanel(this);
+		labelPanel2 = new LabelPanel(this);
 		
 		SpringLayout springLayout = new SpringLayout();
 		contentPane.setLayout(springLayout);
@@ -53,9 +55,20 @@ public class ProgressFrame extends JFrame {
 		labelPanel2.setBackground(Color.GRAY);
 		mainPanel.setBackground(Color.MAGENTA);
 		
+		labelPanel1.setText("Game is loading...");
+		labelPanel1.setLabelBounds(getWidth()/2-225, 150, 840, 150);
+		
+		labelPanel2.setText("0 %");
+		labelPanel2.setLabelBounds(getWidth()/2-760, 0, 840, 100);
+		labelPanel2.setLabelAllignment();
+		
 		contentPane.add(labelPanel1);
 		contentPane.add(mainPanel);
 		contentPane.add(labelPanel2);
+	}
+	
+	public void setTheme(GameTheme theme) {
+		
 	}
 
 	public MainPanel getMainPanel() {

@@ -7,16 +7,20 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import frame.animate.ProgressFrame;
+
 public class MainPanel extends JPanel 
 	implements ActionListener {
 	
+	private ProgressFrame frame;
 	private Timer timer;
 	private double percentage;
 	private int location;
 	
-	public MainPanel() {
-		location = 50;
-		percentage = 0;
+	public MainPanel(ProgressFrame frame) {
+		this.frame = frame;
+		this.location = 50;
+		this.percentage = 0;
 		
 		timer = new Timer(5, this);
 		timer.start();
@@ -41,7 +45,8 @@ public class MainPanel extends JPanel
 			percentage += 0.1295;
 			location++;
 		}
-
+		
+		frame.getLabelPanel2().setText((int) percentage + " %");
 		repaint();
 	}
 	
