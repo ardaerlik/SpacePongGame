@@ -1,5 +1,13 @@
 package main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 public class User {
@@ -21,8 +29,47 @@ public class User {
 		this.themes = themes;
 	}
 	
+	private static void updateUser(User user) {
+		try {
+			Path path = Paths.get("spacePong//txtFiles//gameData.txt");
+			
+			String themes = "";
+			for (int i=0; i<user.getThemes().length; i++) {
+				themes += user.getThemes()[i] + ",";
+			}
+			
+			String output = user.getName() + "|" + user.getMaxLevel() + "|"
+						  + user.getMaxScore() + "|" + user.getMoney() 
+						  + themes;
+			
+			Files.write(path, output.getBytes(), StandardOpenOption.APPEND);			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
-	public static boolean checkUserList() {
+	private static void clearFile() {
+		try {
+			PrintWriter pw = new PrintWriter(new File("spacePong//txtFiles//gameData.txt"));
+			pw.print("");
+			pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void updateAllUsers(ArrayList<User> users) {
+		for (int i=0; i<users.size(); i++) {
+			updateUser(users.get(i));
+		}
+	}
+	
+	
+	public static boolean checkUserList(String userName) {
+		String[] userListRaw = getUserList();
+		User[] userListEdited = extractUserList(userListRaw);
+		
+		
 		return false;
 	}
 	
@@ -30,7 +77,7 @@ public class User {
 		return new String[2];
 	}
 	
-	private static User[] extractUserList() {
+	private static User[] extractUserList(String[] userList) {
 		return new User[2];
 	}
 

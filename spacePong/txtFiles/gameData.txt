@@ -1,0 +1,2 @@
+username1|maxLevel|maxScore|money|1-2
+username2|maxLevel|maxScore|money|1-2-3
