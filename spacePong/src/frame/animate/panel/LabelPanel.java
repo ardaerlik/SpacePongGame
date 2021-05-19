@@ -15,6 +15,9 @@ public class LabelPanel extends JPanel {
 	private String text;
 	
 	public LabelPanel(ProgressFrame frame) {
+		requestFocus();
+		requestFocusInWindow();
+		
 		this.frame = frame;
 		
 		layoutManager();

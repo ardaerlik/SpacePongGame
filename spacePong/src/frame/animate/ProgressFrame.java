@@ -6,6 +6,7 @@ import javax.swing.SpringLayout;
 
 import frame.animate.panel.LabelPanel;
 import frame.animate.panel.MainPanel;
+import frame.animate.panel.MainPanel.Mode;
 import frame.game.GameTheme;
 
 import java.awt.Color;
@@ -18,6 +19,8 @@ public class ProgressFrame extends JFrame {
 	private LabelPanel labelPanel2;
 
 	public ProgressFrame() {
+		requestFocus();
+		requestFocusInWindow();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 1024, 768);
@@ -69,6 +72,10 @@ public class ProgressFrame extends JFrame {
 	
 	public void setTheme(GameTheme theme) {
 		
+	}
+	
+	public void setMode(Mode mode) {
+		mainPanel.setMode(mode);
 	}
 
 	public MainPanel getMainPanel() {

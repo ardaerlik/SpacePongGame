@@ -8,19 +8,28 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import frame.animate.ProgressFrame;
+import main.Main;
 
 public class MainPanel extends JPanel 
 	implements ActionListener {
 	
+	public enum Mode {TO_GAME, DEFAULT};
 	private ProgressFrame frame;
 	private Timer timer;
+	private Mode mode;
 	private double percentage;
 	private int location;
+	private boolean isFinished;
 	
 	public MainPanel(ProgressFrame frame) {
+		requestFocus();
+		requestFocusInWindow();
+		
 		this.frame = frame;
+		this.mode = Mode.DEFAULT;
 		this.location = 50;
 		this.percentage = 0;
+		this.isFinished = false;
 		
 		timer = new Timer(5, this);
 	}
@@ -43,9 +52,21 @@ public class MainPanel extends JPanel
 		if (location+1 < this.getWidth()-200) {
 			percentage += 0.1295;
 			location++;
+		} else {
+			isFinished = true;
+			stopTimer();
+			
+			switch (mode) {
+			case TO_GAME:
+				goToGame();
+				break;
+			default:
+				break;
+			}
 		}
 		
 		frame.getLabelPanel2().setText((int) percentage + " %");
+		
 		repaint();
 	}
 	
@@ -57,8 +78,20 @@ public class MainPanel extends JPanel
 		timer.stop();
 	}
 	
+	public void goToGame() {
+		Main.gamePage();
+	}
+	
+	public void setMode(Mode mode) {
+		this.mode = mode;
+	}
+	
 	public double getPercentage() {
 		return percentage;
+	}
+	
+	public boolean isFinished() {
+		return isFinished;
 	}
 	
 }

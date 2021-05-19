@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import frame.home.HomeFrame;
+import main.Main;
 
 public class StartButton extends JButton {
 
@@ -25,8 +26,7 @@ public class StartButton extends JButton {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("calisiyor");
-			
+			Main.progressPageToGame();
 		}
 		
 	}

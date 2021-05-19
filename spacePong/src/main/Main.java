@@ -1,6 +1,8 @@
-import javax.swing.JFrame;
+package main;
 
+import javax.swing.JFrame;
 import frame.animate.ProgressFrame;
+import frame.animate.panel.MainPanel.Mode;
 import frame.game.*;
 import frame.home.*;
 
@@ -32,7 +34,7 @@ public class Main {
 		currentFrame = homeFrame;
 	}	
 	
-	public static void gamePage() throws InterruptedException {
+	public static void gamePage() {
 		gameFrame = new GameFrame();
 		gameFrame.setBounds(currentFrame.getBounds());
 		gameFrame.playGame();
@@ -47,10 +49,20 @@ public class Main {
 		progressFrame = new ProgressFrame();
 		progressFrame.setBounds(currentFrame.getBounds());
 		progressFrame.setVisible(true);
+		progressFrame.getMainPanel().startTimer();
 		currentFrame.setVisible(false);
 		currentFrame.dispose();
-		
+
 		currentFrame = progressFrame;
+	}
+	
+	public static void progressPageToGame() {
+		progressPage();
+		progressFrame.setMode(Mode.TO_GAME);
+	}
+	
+	public static void killProgressTimer() {
+		progressFrame.getMainPanel().stopTimer();
 	}
 
 }

@@ -10,6 +10,9 @@ public class StartPanel extends JPanel {
 	private StartButton startButton;
 	
 	public StartPanel(HomeFrame frame) {
+		requestFocus();
+		requestFocusInWindow();
+		
 		this.frame = frame;
 		
 		layoutManager();
