@@ -9,6 +9,12 @@ public class StatisticsPanel extends JPanel {
 	
 	public StatisticsPanel(JFrame frame) {
 		this.frame = frame;
+		
+		layoutManager();
+	}
+	
+	private void layoutManager() {
+		setLayout(null);
 	}
 
 }

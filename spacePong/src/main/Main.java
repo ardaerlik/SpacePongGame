@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import frame.animate.ProgressFrame;
 import frame.animate.panel.MainPanel.Mode;
@@ -13,9 +15,17 @@ public class Main {
 	private static ProgressFrame progressFrame;
 	private static CreditsFrame creditsFrame;
 	private static StatisticsFrame statisticsFrame;
+	private static SettingsFrame settingsFrame;
 	private static JFrame currentFrame;
+	private static String userName;
+	private static String[] themes;
+	private static int maxLevel;
+	private static int maxScore;
+	private static int money;
 	
 	public static void main(String[] args) throws InterruptedException {
+		userName = "PlayerDEMO";
+		
 		progressFrame = new ProgressFrame();
 		progressFrame.setVisible(true);
 		progressFrame.getMainPanel().startTimer();
@@ -79,7 +89,13 @@ public class Main {
 	}
 	
 	public static void settingsPage() {
+		settingsFrame = new SettingsFrame();
+		settingsFrame.setBounds(currentFrame.getBounds());
+		settingsFrame.setVisible(true);
+		currentFrame.setVisible(false);
+		currentFrame.dispose();
 		
+		currentFrame = settingsFrame;
 	}
 	
 	public static void progressPageToGame() {
@@ -109,6 +125,46 @@ public class Main {
 	
 	public static void killProgressTimer() {
 		progressFrame.getMainPanel().stopTimer();
+	}
+	
+	public static String getUserName() {
+		return userName;
+	}
+	
+	public String[] getThemes() {
+		return themes;
+	}
+
+	public int getMaxLevel() {
+		return maxLevel;
+	}
+
+	public int getMaxScore() {
+		return maxScore;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+	
+	public static void setUserName(String userName) {
+		Main.userName = userName;
+	}
+
+	public void setThemes(String[] themes) {
+		Main.themes = themes;
+	}
+
+	public void setMaxLevel(int maxLevel) {
+		Main.maxLevel = maxLevel;
+	}
+
+	public void setMaxScore(int maxScore) {
+		Main.maxScore = maxScore;
+	}
+
+	public void setMoney(int money) {
+		Main.money = money;
 	}
 
 }
