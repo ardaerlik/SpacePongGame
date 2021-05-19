@@ -5,20 +5,19 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import frame.home.HomeFrame;
-import main.Main;
 
-public class StartButton extends JButton {
+public class StatisticsButton extends JButton {
 
 	private HomeFrame frame;
 	
-	public StartButton(HomeFrame frame) {
+	public StatisticsButton(HomeFrame frame) {
 		this.frame = frame;
 		
 		setText("");
 		setBorderPainted(false);
-		setBounds(frame.getWidth()/2-40, 20, 80, 80);
-		setToolTipText("Click this button to start game");
-		setIcon(new ImageIcon("spacePong/assets/images/gameButtons/game.png"));
+		setBounds(frame.getWidth()/2-40, 5, 80, 80);
+		setToolTipText("Click this button to reach statistics");
+		setIcon(new ImageIcon("spacePong/assets/images/gameButtons/scores.png"));
 		addActionListener(new Handler());
 	}
 	
@@ -26,7 +25,7 @@ public class StartButton extends JButton {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Main.progressPageToGame();
+			System.out.println("statistics calisiyor");
 		}
 		
 	}

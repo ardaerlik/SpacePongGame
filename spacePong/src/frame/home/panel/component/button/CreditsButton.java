@@ -7,18 +7,18 @@ import javax.swing.JButton;
 import frame.home.HomeFrame;
 import main.Main;
 
-public class StartButton extends JButton {
-
+public class CreditsButton extends JButton {
+	
 	private HomeFrame frame;
 	
-	public StartButton(HomeFrame frame) {
+	public CreditsButton(HomeFrame frame) {
 		this.frame = frame;
 		
 		setText("");
 		setBorderPainted(false);
-		setBounds(frame.getWidth()/2-40, 20, 80, 80);
-		setToolTipText("Click this button to start game");
-		setIcon(new ImageIcon("spacePong/assets/images/gameButtons/game.png"));
+		setBounds(frame.getWidth()-90, 5, 80, 80);
+		setToolTipText("Click this button to reach credits");
+		setIcon(new ImageIcon("spacePong/assets/images/gameButtons/credits.png"));
 		addActionListener(new Handler());
 	}
 	
@@ -26,9 +26,9 @@ public class StartButton extends JButton {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Main.progressPageToGame();
+			Main.progressPageToLicense();
 		}
 		
 	}
-	
+
 }

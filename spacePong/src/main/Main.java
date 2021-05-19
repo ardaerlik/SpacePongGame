@@ -11,6 +11,7 @@ public class Main {
 	private static GameFrame gameFrame;
 	private static HomeFrame homeFrame;
 	private static ProgressFrame progressFrame;
+	private static CreditsFrame creditsFrame;
 	private static JFrame currentFrame;
 	
 	public static void main(String[] args) throws InterruptedException {
@@ -56,9 +57,29 @@ public class Main {
 		currentFrame = progressFrame;
 	}
 	
+	public static void licensePage() {
+		creditsFrame = new CreditsFrame();
+		creditsFrame.setBounds(currentFrame.getBounds());
+		creditsFrame.setVisible(true);
+		currentFrame.setVisible(false);
+		currentFrame.dispose();
+		
+		currentFrame = creditsFrame;
+	}
+	
 	public static void progressPageToGame() {
 		progressPage();
 		progressFrame.setMode(Mode.TO_GAME);
+	}
+	
+	public static void progressPageToHome() {
+		progressPage();
+		progressFrame.setMode(Mode.TO_HOME);
+	}
+	
+	public static void progressPageToLicense() {
+		progressPage();
+		progressFrame.setMode(Mode.TO_LICENSE);
 	}
 	
 	public static void killProgressTimer() {

@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import main.Main;
+
 public class ExitButton extends JButton {
 	
 	public enum Mode {ON, OFF};
@@ -31,8 +33,7 @@ public class ExitButton extends JButton {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mode = Mode.ON;
-			frame.setVisible(false);
-			// frame.dispose();
+			Main.progressPageToHome();
 		}
 		
 	}

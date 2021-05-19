@@ -4,21 +4,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import frame.home.HomeFrame;
+import frame.home.CreditsFrame;
 import main.Main;
 
-public class StartButton extends JButton {
-
-	private HomeFrame frame;
+public class ReturnHomeButton extends JButton {
 	
-	public StartButton(HomeFrame frame) {
+	private CreditsFrame frame;
+	
+	public ReturnHomeButton(CreditsFrame frame) {
 		this.frame = frame;
 		
 		setText("");
 		setBorderPainted(false);
-		setBounds(frame.getWidth()/2-40, 20, 80, 80);
-		setToolTipText("Click this button to start game");
-		setIcon(new ImageIcon("spacePong/assets/images/gameButtons/game.png"));
+		setBounds(frame.getWidth()/2-40, 5, 80, 80);
+		setToolTipText("Click this button to go back to home");
+		setIcon(new ImageIcon("spacePong/assets/images/gameButtons/home.png"));
 		addActionListener(new Handler());
 	}
 	
@@ -26,9 +26,9 @@ public class StartButton extends JButton {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Main.progressPageToGame();
+			Main.progressPageToHome();
 		}
 		
 	}
-	
+
 }

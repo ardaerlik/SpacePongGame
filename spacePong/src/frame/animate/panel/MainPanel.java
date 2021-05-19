@@ -13,7 +13,8 @@ import main.Main;
 public class MainPanel extends JPanel 
 	implements ActionListener {
 	
-	public enum Mode {TO_GAME, DEFAULT};
+	public enum Mode {TO_GAME, TO_HOME, TO_LICENSE, 
+		TO_SETTINGS, TO_STATISTICS, DEFAULT};
 	private ProgressFrame frame;
 	private Timer timer;
 	private Mode mode;
@@ -60,6 +61,12 @@ public class MainPanel extends JPanel
 			case TO_GAME:
 				goToGame();
 				break;
+			case TO_HOME:
+				goToHome();
+				break;
+			case TO_LICENSE:
+				goToLicense();
+				break;
 			default:
 				break;
 			}
@@ -78,8 +85,16 @@ public class MainPanel extends JPanel
 		timer.stop();
 	}
 	
-	public void goToGame() {
+	private void goToGame() {
 		Main.gamePage();
+	}
+	
+	private void goToHome() {
+		Main.homePage();
+	} 
+	
+	private void goToLicense() {
+		Main.licensePage();
 	}
 	
 	public void setMode(Mode mode) {

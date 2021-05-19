@@ -2,10 +2,8 @@ package frame.game.panel.component.button;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
 import frame.game.GameFrame;
 import frame.game.panel.Mode;
 
