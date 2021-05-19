@@ -12,6 +12,7 @@ public class Main {
 	private static HomeFrame homeFrame;
 	private static ProgressFrame progressFrame;
 	private static CreditsFrame creditsFrame;
+	private static StatisticsFrame statisticsFrame;
 	private static JFrame currentFrame;
 	
 	public static void main(String[] args) throws InterruptedException {
@@ -67,6 +68,20 @@ public class Main {
 		currentFrame = creditsFrame;
 	}
 	
+	public static void statisticsPage() {
+		statisticsFrame = new StatisticsFrame();
+		statisticsFrame.setBounds(currentFrame.getBounds());
+		statisticsFrame.setVisible(true);
+		currentFrame.setVisible(false);
+		currentFrame.dispose();
+		
+		currentFrame = statisticsFrame;
+	}
+	
+	public static void settingsPage() {
+		
+	}
+	
 	public static void progressPageToGame() {
 		progressPage();
 		progressFrame.setMode(Mode.TO_GAME);
@@ -80,6 +95,16 @@ public class Main {
 	public static void progressPageToLicense() {
 		progressPage();
 		progressFrame.setMode(Mode.TO_LICENSE);
+	}
+	
+	public static void progressPageToStatistics() {
+		progressPage();
+		progressFrame.setMode(Mode.TO_STATISTICS);
+	}
+	
+	public static void progressPageToSettings() {
+		progressPage();
+		progressFrame.setMode(Mode.TO_SETTINGS);
 	}
 	
 	public static void killProgressTimer() {

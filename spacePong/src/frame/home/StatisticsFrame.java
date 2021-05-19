@@ -1,23 +1,51 @@
 package frame.home;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.SpringLayout;
+import frame.home.panel.*;
 
 public class StatisticsFrame extends JFrame {
 
 	private JPanel contentPane;
+	private CreditsButtonsPanel creditsButtonsPanel;
+	private StatisticsPanel statisticsPanel;
 
 	public StatisticsFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setResizable(false);
+		setBounds(100, 100, 1024, 768);
+		
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		layoutManager();
+	}
+	
+	private void layoutManager() {
+		statisticsPanel = new StatisticsPanel(this);
+		creditsButtonsPanel = new CreditsButtonsPanel(this);
+		
+		SpringLayout springLayout = new SpringLayout();
+		contentPane.setLayout(springLayout);
+		
+		springLayout.putConstraint(SpringLayout.NORTH, statisticsPanel, 0, SpringLayout.NORTH, contentPane);
+		springLayout.putConstraint(SpringLayout.SOUTH, statisticsPanel, 623, SpringLayout.NORTH, contentPane);
+		springLayout.putConstraint(SpringLayout.WEST, statisticsPanel, 0, SpringLayout.WEST, contentPane);
+		springLayout.putConstraint(SpringLayout.EAST, statisticsPanel, 1024, SpringLayout.WEST, contentPane);
+		
+		springLayout.putConstraint(SpringLayout.NORTH, creditsButtonsPanel, 623, SpringLayout.NORTH, contentPane);
+		springLayout.putConstraint(SpringLayout.SOUTH, creditsButtonsPanel, 768, SpringLayout.NORTH, contentPane);
+		springLayout.putConstraint(SpringLayout.WEST, creditsButtonsPanel, 0, SpringLayout.WEST, contentPane);
+		springLayout.putConstraint(SpringLayout.EAST, creditsButtonsPanel, 1024, SpringLayout.WEST, contentPane);
+		
+		statisticsPanel.setBackground(Color.MAGENTA);
+		creditsButtonsPanel.setBackground(Color.GREEN);
+		
+		contentPane.add(statisticsPanel);
+		contentPane.add(creditsButtonsPanel); 
 	}
 
 }

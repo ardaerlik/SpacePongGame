@@ -67,6 +67,12 @@ public class MainPanel extends JPanel
 			case TO_LICENSE:
 				goToLicense();
 				break;
+			case TO_SETTINGS:
+				goToSettings();
+				break;
+			case TO_STATISTICS:
+				goToStatistics();
+				break;
 			default:
 				break;
 			}
@@ -95,6 +101,14 @@ public class MainPanel extends JPanel
 	
 	private void goToLicense() {
 		Main.licensePage();
+	}
+	
+	private void goToStatistics() {
+		Main.statisticsPage();
+	}
+	
+	private void goToSettings() {
+		Main.settingsPage();
 	}
 	
 	public void setMode(Mode mode) {

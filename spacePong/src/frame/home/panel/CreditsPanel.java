@@ -51,4 +51,29 @@ public class CreditsPanel extends JPanel {
 			e.printStackTrace();
 		}
 	}
+
+	public CreditsFrame getFrame() {
+		return frame;
+	}
+
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setFrame(CreditsFrame frame) {
+		this.frame = frame;
+	}
+
+	public void setTextArea(JTextArea textArea) {
+		this.textArea = textArea;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
 }

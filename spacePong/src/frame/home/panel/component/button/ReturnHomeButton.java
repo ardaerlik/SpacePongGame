@@ -4,14 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import frame.home.CreditsFrame;
+import javax.swing.JFrame;
 import main.Main;
 
 public class ReturnHomeButton extends JButton {
 	
-	private CreditsFrame frame;
+	private JFrame frame;
 	
-	public ReturnHomeButton(CreditsFrame frame) {
+	public ReturnHomeButton(JFrame frame) {
 		this.frame = frame;
 		
 		setText("");
