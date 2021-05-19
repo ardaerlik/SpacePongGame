@@ -16,8 +16,9 @@ public class Main {
 		progressFrame.setVisible(true);
 		progressFrame.getMainPanel().startTimer();
 		currentFrame = progressFrame;
+		
 		Thread.sleep(6700);
-		//gamePage();
+		
 		homePage();
 	}
 	
@@ -44,6 +45,12 @@ public class Main {
 	
 	public static void progressPage() {
 		progressFrame = new ProgressFrame();
+		progressFrame.setBounds(currentFrame.getBounds());
+		progressFrame.setVisible(true);
+		currentFrame.setVisible(false);
+		currentFrame.dispose();
+		
+		currentFrame = progressFrame;
 	}
 
 }
