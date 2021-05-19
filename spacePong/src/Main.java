@@ -2,23 +2,33 @@ import javax.swing.JFrame;
 
 import frame.animate.ProgressFrame;
 import frame.game.*;
+import frame.home.*;
 
 public class Main {
 	
 	private static GameFrame gameFrame;
+	private static HomeFrame homeFrame;
 	private static ProgressFrame progressFrame;
 	private static JFrame currentFrame;
 	
 	public static void main(String[] args) throws InterruptedException {
 		progressFrame = new ProgressFrame();
 		progressFrame.setVisible(true);
+		progressFrame.getMainPanel().startTimer();
 		currentFrame = progressFrame;
-		Thread.sleep(5000);
+		Thread.sleep(6700);
 		//gamePage();
+		homePage();
 	}
 	
 	public static void homePage() {
+		homeFrame = new HomeFrame();
+		homeFrame.setBounds(currentFrame.getBounds());
+		homeFrame.setVisible(true);
+		currentFrame.setVisible(false);
+		currentFrame.dispose();
 		
+		currentFrame = homeFrame;
 	}	
 	
 	public static void gamePage() throws InterruptedException {

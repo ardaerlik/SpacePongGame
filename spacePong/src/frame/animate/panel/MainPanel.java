@@ -23,7 +23,6 @@ public class MainPanel extends JPanel
 		this.percentage = 0;
 		
 		timer = new Timer(5, this);
-		timer.start();
 	}
 	
 	@Override
@@ -48,6 +47,14 @@ public class MainPanel extends JPanel
 		
 		frame.getLabelPanel2().setText((int) percentage + " %");
 		repaint();
+	}
+	
+	public void startTimer() {
+		timer.start();
+	}
+	
+	public void stopTimer() {
+		timer.stop();
 	}
 	
 	public double getPercentage() {
