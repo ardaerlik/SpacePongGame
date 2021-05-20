@@ -2,20 +2,18 @@ package frame.game.panel.component.button;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-
+import frame.game.GameFrame;
 import main.Main;
 
 public class ExitButton extends JButton {
 	
 	public enum Mode {ON, OFF};
 	private Mode mode;
-	private JFrame frame;
+	private GameFrame frame;
 	
-	public ExitButton(JFrame frame) {
+	public ExitButton(GameFrame frame) {
 		this.frame = frame;
 		
 		setText("");
@@ -33,7 +31,7 @@ public class ExitButton extends JButton {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mode = Mode.ON;
-			Main.progressPageToHome();
+			frame.finishGame();
 		}
 		
 	}

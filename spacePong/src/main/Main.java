@@ -25,6 +25,7 @@ public class Main {
 	
 	public static void main(String[] args) throws InterruptedException {
 		userName = "PlayerDEMO";
+		User.getOldUserList();
 		
 		progressFrame = new ProgressFrame();
 		progressFrame.setVisible(true);
@@ -100,31 +101,62 @@ public class Main {
 	
 	public static void progressPageToGame() {
 		progressPage();
+		User.updateAllUsers(User.getUsers());
 		progressFrame.setMode(Mode.TO_GAME);
 	}
 	
 	public static void progressPageToHome() {
 		progressPage();
+		User.updateAllUsers(User.getUsers());
 		progressFrame.setMode(Mode.TO_HOME);
 	}
 	
 	public static void progressPageToLicense() {
 		progressPage();
+		User.updateAllUsers(User.getUsers());
 		progressFrame.setMode(Mode.TO_LICENSE);
 	}
 	
 	public static void progressPageToStatistics() {
 		progressPage();
+		User.updateAllUsers(User.getUsers());
 		progressFrame.setMode(Mode.TO_STATISTICS);
 	}
 	
 	public static void progressPageToSettings() {
 		progressPage();
+		User.updateAllUsers(User.getUsers());
 		progressFrame.setMode(Mode.TO_SETTINGS);
 	}
 	
 	public static void killProgressTimer() {
 		progressFrame.getMainPanel().stopTimer();
+	}
+	
+	public static void setLastGameSettings(int maxLevel, int maxScore, int money) {
+		int userNo = User.checkUserList(userName);
+		Main.money = money;
+		Main.maxLevel = maxLevel;
+		Main.maxScore = maxScore;
+		
+		if (userNo != -1) {
+			// existingUser
+			if (User.getUsers().get(userNo).getMaxLevel() < maxLevel) {
+				User.getUsers().get(userNo).setMaxLevel(maxLevel);
+			}
+			
+			if (User.getUsers().get(userNo).getMaxScore() < maxScore) {
+				User.getUsers().get(userNo).setMaxScore(maxScore);
+			}
+			
+			User.getUsers().get(userNo).setMoney(
+					User.getUsers().get(userNo).getMoney() + money);
+			
+		} else {
+			ArrayList<User> oldUsers = User.getUsers();
+			String[] themes = {"1"};
+			oldUsers.add(new User(userName, maxLevel, maxScore, money, themes));
+		}
 	}
 	
 	public static String getUserName() {

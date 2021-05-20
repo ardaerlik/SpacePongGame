@@ -9,6 +9,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class User {
 	
@@ -33,14 +36,14 @@ public class User {
 		try {
 			Path path = Paths.get("spacePong//txtFiles//gameData.txt");
 			
-			String themes = "";
-			for (int i=0; i<user.getThemes().length; i++) {
-				themes += user.getThemes()[i] + ",";
-			}
+			String themes = Arrays.asList(user.getThemes())
+								  .stream()
+								  .collect(Collectors.joining("-"))
+								  .toString();
 			
-			String output = user.getName() + "|" + user.getMaxLevel() + "|"
-						  + user.getMaxScore() + "|" + user.getMoney() 
-						  + themes;
+			String output = user.getName() + "," + user.getMaxLevel() + ","
+						  + user.getMaxScore() + "," + user.getMoney() + "," 
+						  + themes + System.lineSeparator();
 			
 			Files.write(path, output.getBytes(), StandardOpenOption.APPEND);			
 		} catch (IOException e) {
@@ -59,28 +62,77 @@ public class User {
 	}
 	
 	public static void updateAllUsers(ArrayList<User> users) {
+		clearFile();
+		
 		for (int i=0; i<users.size(); i++) {
 			updateUser(users.get(i));
 		}
 	}
 	
 	
-	public static boolean checkUserList(String userName) {
-		String[] userListRaw = getUserList();
-		User[] userListEdited = extractUserList(userListRaw);
+	public static int checkUserList(String userName) {
+		for (int i=0; i<users.size(); i++) {
+			if (userName.equals(users.get(i).getName())) {
+				return i;
+			}
+		}
 		
-		
-		return false;
+		return -1;
 	}
 	
-	private static String[] getUserList() {
-		return new String[2];
+	public static void getOldUserList() {
+		ArrayList<String> userListRaw = getUserList();
+		User.users = extractUserList(userListRaw);
 	}
 	
-	private static User[] extractUserList(String[] userList) {
-		return new User[2];
+	private static ArrayList<String> getUserList() {
+		ArrayList<String> users = new ArrayList<String>(); 
+		
+		try {
+			Scanner file = new Scanner(Paths.get("spacePong//txtFiles//gameData.txt"));
+			
+			while (file.hasNextLine()) {
+				users.add(file.nextLine());
+			}
+			
+			file.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return users;
+	}
+	
+	private static ArrayList<User> extractUserList(ArrayList<String> userList) {
+		ArrayList<User> usersEdited = new ArrayList<User>();
+
+		for (int i=0; i<userList.size(); i++) {
+			String[] userInfo = userList.get(i).split(",");
+
+			User user = new User(userInfo[0],
+					Integer.parseInt(userInfo[1]),
+					Integer.parseInt(userInfo[2]),
+					Integer.parseInt(userInfo[3]),
+					userInfo[4].split("-"));
+			
+			usersEdited.add(user);
+		}
+		
+		return usersEdited;
 	}
 
+	public void updateThemes(String theme) {
+		String[] newThemes = new String[themes.length+1];
+		
+		for (int i=0; i<themes.length; i++) {
+			newThemes[i] = themes[i];
+		}
+		
+		newThemes[themes.length] = theme;
+		
+		this.themes = newThemes.clone();
+	}
+	
 	public static ArrayList<User> getUsers() {
 		return users;
 	}

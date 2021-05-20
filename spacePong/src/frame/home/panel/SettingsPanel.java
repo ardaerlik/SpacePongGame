@@ -123,6 +123,10 @@ public class SettingsPanel extends JPanel {
 				userName = e.getActionCommand();
 			}
 			else if (e.getSource() == saveButton) {
+				if (userName == null) {
+					userName = "tmp" + Math.random();
+				}
+				
 				Main.setUserName(userName);
 				textField.setEditable(false);
 			}

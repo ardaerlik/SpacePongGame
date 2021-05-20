@@ -1,2 +1,5 @@
-username1|maxLevel|maxScore|money|1-2
-username2|maxLevel|maxScore|money|1-2-3
+username1,1,150,3201,1-2
+username2,3,100,1691,2-3
+PlayerDEMO,1,123,123,1
+ardaerlik,2,173,296,1
+tmp0.8189862790612353,1,123,123,1

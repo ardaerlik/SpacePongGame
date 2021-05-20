@@ -1,6 +1,8 @@
 package frame.game;
 
 import frame.game.panel.*;
+import main.Main;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -73,7 +75,11 @@ public class GameFrame extends JFrame
 	}
 	
 	public void finishGame() {
-		System.out.println("oyun bitti");
+		Main.setLastGameSettings(Integer.parseInt(topPanel.getLevelPanel().getLevel()),
+				Integer.parseInt(topPanel.getScorePanel().getScore()), 
+				Integer.parseInt(topPanel.getScorePanel().getScore()));
+		
+		Main.progressPageToHome();
 	}
 	
 	public void pauseGame() {
@@ -119,6 +125,17 @@ public class GameFrame extends JFrame
 		gamePanel.playLevel();
 		gamePanel.resumeGame();
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {		
+		if (gamePanel.isTimeIsOver() && topPanel.getScorePanel().getLiveCount() > 0) {
+			newLevel();
+		}
+		
+		if (topPanel.getScorePanel().getLiveCount() == 0) {
+			finishGame();
+		}
+	}
 	
 	public GamePanel getGamePanel() {
 		return this.gamePanel;
@@ -130,17 +147,6 @@ public class GameFrame extends JFrame
 	
 	public BelowPanel getBelowPanel() {
 		return this.belowPanel;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {		
-		if (gamePanel.isTimeIsOver() && topPanel.getScorePanel().getLiveCount() > 0) {
-			newLevel();
-		}
-		
-		if (topPanel.getScorePanel().getLiveCount() == 0) {
-			finishGame();
-		}
 	}
 
 }
