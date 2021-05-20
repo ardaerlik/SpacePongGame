@@ -43,9 +43,6 @@ public class GamePanel extends JPanel
 	private boolean isValid;
 	private boolean timeIsOver;
 	private Ball ball;
-	/*private Meteor meteor;
-	private Star star;
-	private Ufo ufo;*/
 	
 	public GamePanel(GameFrame frame, TopPanel topPanel) {
 		this.frame = frame;
@@ -64,20 +61,10 @@ public class GamePanel extends JPanel
 		addKeyListener(this);
 		
 		ball = new Ball(this);
-		/*meteor = new Meteor(this);
-		star = new Star(this);
-		ufo = new Ufo(this);*/
+
 		timer = new Timer(20, this);
 		paddle = new Rectangle(paddlePositionX, paddlePositionY, 
 				PADDLE_WIDTH, PADDLE_HEIGHT);
-		
-		/*star.setPositionX(480);
-		star.setPositionY(60);
-		ufo.setPositionX(540);
-		ufo.setPositionY(60);
-		gameObjects.add(meteor);
-		gameObjects.add(star);
-		gameObjects.add(ufo);*/
 		
 		gameObjects = GameObjectHelper.generateObjects(this);
 	}
@@ -140,7 +127,7 @@ public class GamePanel extends JPanel
 		paddlePositionX = 50;
 		
 		ball = new Ball(this);
-		//meteor = new Meteor(this);
+
 		timer = new Timer(20, this);
 		paddle = new Rectangle(paddlePositionX, paddlePositionY, 
 				PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -217,6 +204,7 @@ public class GamePanel extends JPanel
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (GameObjectHelper.intersectsAny(ball, gameObjects)) {
+			System.out.println("carpisma");
 			//mode = Mode.PAUSE;
 		}
 		

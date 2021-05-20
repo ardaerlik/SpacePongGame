@@ -102,30 +102,35 @@ public class Main {
 		progressPage();
 		User.updateAllUsers(User.getUsers());
 		progressFrame.setMode(Mode.TO_GAME);
+		progressFrame.getLabelPanel1().setText("Game is loading...");
 	}
 	
 	public static void progressPageToHome() {
 		progressPage();
 		User.updateAllUsers(User.getUsers());
 		progressFrame.setMode(Mode.TO_HOME);
+		progressFrame.getLabelPanel1().setText("Home is loading...");
 	}
 	
 	public static void progressPageToLicense() {
 		progressPage();
 		User.updateAllUsers(User.getUsers());
 		progressFrame.setMode(Mode.TO_LICENSE);
+		progressFrame.getLabelPanel1().setText("License is loading...");
 	}
 	
 	public static void progressPageToStatistics() {
 		progressPage();
 		User.updateAllUsers(User.getUsers());
 		progressFrame.setMode(Mode.TO_STATISTICS);
+		progressFrame.getLabelPanel1().setText("Statistics is loading...");
 	}
 	
 	public static void progressPageToSettings() {
 		progressPage();
 		User.updateAllUsers(User.getUsers());
 		progressFrame.setMode(Mode.TO_SETTINGS);
+		progressFrame.getLabelPanel1().setText("Settings is loading...");
 	}
 	
 	public static void killProgressTimer() {
