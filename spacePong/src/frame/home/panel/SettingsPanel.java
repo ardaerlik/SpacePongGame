@@ -121,6 +121,8 @@ public class SettingsPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == textField) {
 				userName = e.getActionCommand();
+				saveButton.setEnabled(true);
+				resetButton.setEnabled(true);
 			}
 			else if (e.getSource() == saveButton) {
 				if (userName == null) {
@@ -129,11 +131,15 @@ public class SettingsPanel extends JPanel {
 				
 				Main.setUserName(userName);
 				textField.setEditable(false);
+				saveButton.setEnabled(false);
+				resetButton.setEnabled(true);
 			}
 			else if (e.getSource() == resetButton) {
 				Main.setUserName("PlayerDEMO");
 				textField.setText("Press here to type");
 				textField.setEditable(true);
+				saveButton.setEnabled(true);
+				resetButton.setEnabled(false);
 			}	
 		}
 		

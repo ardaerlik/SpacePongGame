@@ -139,7 +139,6 @@ public class Main {
 		Main.maxScore = maxScore;
 		
 		if (userNo != -1) {
-			// existingUser
 			if (User.getUsers().get(userNo).getMaxLevel() < maxLevel) {
 				User.getUsers().get(userNo).setMaxLevel(maxLevel);
 			}

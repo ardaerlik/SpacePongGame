@@ -2,13 +2,16 @@ package frame.home.panel;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
 import frame.home.StatisticsFrame;
-import javax.swing.JLabel;
+import main.User;
 
+import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -65,18 +68,55 @@ public class StatisticsPanel extends JPanel {
 		add(scoreButton);
 		add(levelButton);
 		
+		statisticsBuilder();
+		
 		setScoreChart();
 		setLevelChart();
-		
-		statisticsBuilder();
 	}
 	
 	private void statisticsBuilder() {
+		String[][] scoreValues = statisticsChecker(Mode.SCORE);
+		String[][] levelValues = statisticsChecker(Mode.LEVEL);
 		
+		setScoreRank(scoreValues);
+		setLevelRank(levelValues);
 	}
 	
-	private String[] statisticsChecker(Mode mode) {
-		return new String[3];
+	private String[][] statisticsChecker(Mode mode) {
+		Map<Integer, String> userMap = new TreeMap<Integer, String>();
+		String[][] values = new String[3][2];
+
+		ArrayList<User> users = User.getUsers();
+		
+		if (mode == Mode.LEVEL) {
+			for (int i=0; i<users.size(); i++) {
+				userMap.put(users.get(i).getMaxLevel(), 
+						users.get(i).getName());
+			}
+		}
+		else if (mode == Mode.SCORE) {
+			for (int i=0; i<users.size(); i++) {
+				userMap.put(users.get(i).getMaxScore(), 
+						users.get(i).getName());
+			}
+		} 
+		
+		values[0][0] = (String) (userMap.keySet().toArray()[0] + "");
+		values[1][0] = (String) (userMap.keySet().toArray()[1] + "");
+		values[2][0] = (String) (userMap.keySet().toArray()[2] + "");
+		
+		values[0][1] = (String) (userMap.values().toArray()[0] + "");
+		values[1][1] = (String) (userMap.values().toArray()[1] + "");
+		values[2][1] = (String) (userMap.values().toArray()[2] + "");
+		
+		System.out.println(values[0][0]);
+		System.out.println(values[0][1]);
+		System.out.println(values[1][0]);
+		System.out.println(values[1][1]);
+		System.out.println(values[2][0]);
+		System.out.println(values[2][1]);
+		
+		return values;
 	}
 	
 	private void setScoreChart() {
@@ -103,19 +143,83 @@ public class StatisticsPanel extends JPanel {
 		add(levelChart);
 	}
 	
+	private void setScoreRank(String[][] scoreValues) {
+		score1 = new JLabel(scoreValues[0][0] + " | " + scoreValues[0][1]);
+		score2 = new JLabel(scoreValues[1][0] + " | " + scoreValues[1][1]);
+		score3 = new JLabel(scoreValues[2][0] + " | " + scoreValues[2][1]);
+		
+		score1.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 12));
+		score2.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 12));
+		score3.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 12));
+		
+		score1.setBounds(546, 119, 172, 105);
+		score2.setBounds(341, 263, 139, 86);
+		score3.setBounds(778, 264, 137, 86);
+		
+		score1.setVisible(true);
+		score2.setVisible(true);
+		score3.setVisible(true);
+	}
+	
+	private void setLevelRank(String[][] levelValues) {
+		level1 = new JLabel(levelValues[0][0] + " | " + levelValues[0][1]);
+		level2 = new JLabel(levelValues[1][0] + " | " + levelValues[1][1]);
+		level3 = new JLabel(levelValues[2][0] + " | " + levelValues[2][1]);
+		
+		level1.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 12));
+		level2.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 12));
+		level3.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 12));
+		
+		level1.setBounds(546, 119, 172, 105);
+		level2.setBounds(341, 263, 139, 86);
+		level3.setBounds(778, 264, 137, 86);
+		
+		level1.setVisible(false);
+		level2.setVisible(false);
+		level3.setVisible(false);
+	}
+	
+	private void disableScores() {
+		scoreChart.setVisible(false);
+		score1.setVisible(false);
+		score2.setVisible(false);
+		score3.setVisible(false);
+	}
+	
+	private void disableLevels() {
+		levelChart.setVisible(false);
+		level1.setVisible(false);
+		level2.setVisible(false);
+		level3.setVisible(false);
+	}
+	
+	private void enableScores() {
+		scoreChart.setVisible(true);
+		score1.setVisible(true);
+		score2.setVisible(true);
+		score3.setVisible(true);
+	}
+	
+	private void enableLevels() {
+		levelChart.setVisible(true);
+		level1.setVisible(true);
+		level2.setVisible(true);
+		level3.setVisible(true);
+	}
+	
 	private class Handler implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == scoreButton) {
-				levelChart.setVisible(false);
-				scoreChart.setVisible(true);
+				disableLevels();
+				enableScores();
 				scoreButton.setEnabled(false);
 				levelButton.setEnabled(true);
 			}
 			else if (e.getSource() == levelButton) {
-				scoreChart.setVisible(false);
-				levelChart.setVisible(true);
+				disableScores();
+				enableLevels();
 				levelButton.setEnabled(false);
 				scoreButton.setEnabled(true);
 			}
