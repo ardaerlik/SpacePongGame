@@ -2,19 +2,19 @@ package frame.home.panel;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import frame.home.StatisticsFrame;
-import main.User;
-
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import frame.home.StatisticsFrame;
+import main.User;
 
 public class StatisticsPanel extends JPanel {
 	
@@ -30,6 +30,12 @@ public class StatisticsPanel extends JPanel {
 	private JLabel level1;
 	private JLabel level2;
 	private JLabel level3;
+	private JLabel point11;
+	private JLabel point12;
+	private JLabel point13;
+	private JLabel point21;
+	private JLabel point22;
+	private JLabel point23;
 	
 	public StatisticsPanel(StatisticsFrame frame) {
 		this.frame = frame;
@@ -68,10 +74,10 @@ public class StatisticsPanel extends JPanel {
 		add(scoreButton);
 		add(levelButton);
 		
-		statisticsBuilder();
-		
 		setScoreChart();
 		setLevelChart();
+		
+		statisticsBuilder();
 	}
 	
 	private void statisticsBuilder() {
@@ -83,40 +89,45 @@ public class StatisticsPanel extends JPanel {
 	}
 	
 	private String[][] statisticsChecker(Mode mode) {
-		Map<Integer, String> userMap = new TreeMap<Integer, String>();
+		Map<String, Integer> userMap = getUserMap(mode);
+		LinkedHashMap<String, Integer> sortedMap = new LinkedHashMap<>();
 		String[][] values = new String[3][2];
-
+		
+		userMap.entrySet()
+			   .stream()
+			   .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+			   .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
+		
+		values[0][0] = (String) (sortedMap.keySet().toArray()[0] + "");
+		values[1][0] = (String) (sortedMap.keySet().toArray()[1] + "");
+		values[2][0] = (String) (sortedMap.keySet().toArray()[2] + "");
+		
+		values[0][1] = (String) (sortedMap.values().toArray()[0] + "");
+		values[1][1] = (String) (sortedMap.values().toArray()[1] + "");
+		values[2][1] = (String) (sortedMap.values().toArray()[2] + "");
+		
+		return values;
+	}
+	
+	private Map<String, Integer> getUserMap(Mode mode){
+		Map<String, Integer> map = new HashMap<>();
+		
 		ArrayList<User> users = User.getUsers();
 		
 		if (mode == Mode.LEVEL) {
 			for (int i=0; i<users.size(); i++) {
-				userMap.put(users.get(i).getMaxLevel(), 
-						users.get(i).getName());
+				map.put(users.get(i).getName(),
+						users.get(i).getMaxLevel());
 			}
 		}
 		else if (mode == Mode.SCORE) {
 			for (int i=0; i<users.size(); i++) {
-				userMap.put(users.get(i).getMaxScore(), 
-						users.get(i).getName());
+				map.put(users.get(i).getName(),
+						users.get(i).getMaxScore());
 			}
-		} 
+		}
 		
-		values[0][0] = (String) (userMap.keySet().toArray()[0] + "");
-		values[1][0] = (String) (userMap.keySet().toArray()[1] + "");
-		values[2][0] = (String) (userMap.keySet().toArray()[2] + "");
-		
-		values[0][1] = (String) (userMap.values().toArray()[0] + "");
-		values[1][1] = (String) (userMap.values().toArray()[1] + "");
-		values[2][1] = (String) (userMap.values().toArray()[2] + "");
-		
-		System.out.println(values[0][0]);
-		System.out.println(values[0][1]);
-		System.out.println(values[1][0]);
-		System.out.println(values[1][1]);
-		System.out.println(values[2][0]);
-		System.out.println(values[2][1]);
-		
-		return values;
+		return map;
 	}
 	
 	private void setScoreChart() {
@@ -144,39 +155,99 @@ public class StatisticsPanel extends JPanel {
 	}
 	
 	private void setScoreRank(String[][] scoreValues) {
-		score1 = new JLabel(scoreValues[0][0] + " | " + scoreValues[0][1]);
-		score2 = new JLabel(scoreValues[1][0] + " | " + scoreValues[1][1]);
-		score3 = new JLabel(scoreValues[2][0] + " | " + scoreValues[2][1]);
+		score1 = new JLabel(scoreValues[0][0]);
+		score2 = new JLabel(scoreValues[1][0]);
+		score3 = new JLabel(scoreValues[2][0]);
 		
-		score1.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 12));
-		score2.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 12));
-		score3.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 12));
+		point11 = new JLabel(scoreValues[0][1]);
+		point12 = new JLabel(scoreValues[1][1]);
+		point13 = new JLabel(scoreValues[2][1]);
+
+		score1.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
+		score2.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
+		score3.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
 		
-		score1.setBounds(546, 119, 172, 105);
-		score2.setBounds(341, 263, 139, 86);
-		score3.setBounds(778, 264, 137, 86);
+		point11.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
+		point12.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
+		point13.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
+		
+		score1.setHorizontalTextPosition(SwingConstants.CENTER);
+		score2.setHorizontalTextPosition(SwingConstants.CENTER);
+		score3.setHorizontalTextPosition(SwingConstants.CENTER);
+		
+		point11.setHorizontalTextPosition(SwingConstants.CENTER);
+		point12.setHorizontalTextPosition(SwingConstants.CENTER);
+		point13.setHorizontalTextPosition(SwingConstants.CENTER);
+		
+		score1.setBounds(586, 124, 172, 105);
+		score2.setBounds(371, 268, 139, 86);
+		score3.setBounds(788, 269, 137, 86);
+		
+		point11.setBounds(616, 99, 172, 105);
+		point12.setBounds(391, 243, 139, 86);
+		point13.setBounds(828, 244, 137, 86);
 		
 		score1.setVisible(true);
 		score2.setVisible(true);
 		score3.setVisible(true);
+		point11.setVisible(true);
+		point12.setVisible(true);
+		point13.setVisible(true);
+		
+		add(score1);
+		add(score2);
+		add(score3);
+		add(point11);
+		add(point12);
+		add(point13);
 	}
 	
 	private void setLevelRank(String[][] levelValues) {
-		level1 = new JLabel(levelValues[0][0] + " | " + levelValues[0][1]);
-		level2 = new JLabel(levelValues[1][0] + " | " + levelValues[1][1]);
-		level3 = new JLabel(levelValues[2][0] + " | " + levelValues[2][1]);
+		level1 = new JLabel(levelValues[0][0]);
+		level2 = new JLabel(levelValues[1][0]);
+		level3 = new JLabel(levelValues[2][0]);
 		
-		level1.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 12));
-		level2.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 12));
-		level3.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 12));
+		point21 = new JLabel(levelValues[0][1]);
+		point22 = new JLabel(levelValues[1][1]);
+		point23 = new JLabel(levelValues[2][1]);
 		
-		level1.setBounds(546, 119, 172, 105);
-		level2.setBounds(341, 263, 139, 86);
-		level3.setBounds(778, 264, 137, 86);
+		level1.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
+		level2.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
+		level3.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
+		
+		point21.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
+		point22.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
+		point23.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
+		
+		level1.setHorizontalTextPosition(SwingConstants.CENTER);
+		level2.setHorizontalTextPosition(SwingConstants.CENTER);
+		level3.setHorizontalTextPosition(SwingConstants.CENTER);
+		
+		point21.setHorizontalTextPosition(SwingConstants.CENTER);
+		point22.setHorizontalTextPosition(SwingConstants.CENTER);
+		point23.setHorizontalTextPosition(SwingConstants.CENTER);
+		
+		level1.setBounds(586, 124, 172, 105);
+		level2.setBounds(371, 268, 139, 86);
+		level3.setBounds(788, 269, 137, 86);
+		
+		point21.setBounds(616, 99, 172, 105);
+		point22.setBounds(391, 243, 139, 86);
+		point23.setBounds(828, 244, 137, 86);
 		
 		level1.setVisible(false);
 		level2.setVisible(false);
 		level3.setVisible(false);
+		point21.setVisible(false);
+		point22.setVisible(false);
+		point23.setVisible(false);
+		
+		add(level1);
+		add(level2);
+		add(level3);
+		add(point21);
+		add(point22);
+		add(point23);
 	}
 	
 	private void disableScores() {
@@ -184,6 +255,9 @@ public class StatisticsPanel extends JPanel {
 		score1.setVisible(false);
 		score2.setVisible(false);
 		score3.setVisible(false);
+		point11.setVisible(false);
+		point12.setVisible(false);
+		point13.setVisible(false);
 	}
 	
 	private void disableLevels() {
@@ -191,6 +265,9 @@ public class StatisticsPanel extends JPanel {
 		level1.setVisible(false);
 		level2.setVisible(false);
 		level3.setVisible(false);
+		point21.setVisible(false);
+		point22.setVisible(false);
+		point23.setVisible(false);
 	}
 	
 	private void enableScores() {
@@ -198,6 +275,9 @@ public class StatisticsPanel extends JPanel {
 		score1.setVisible(true);
 		score2.setVisible(true);
 		score3.setVisible(true);
+		point11.setVisible(true);
+		point12.setVisible(true);
+		point13.setVisible(true);
 	}
 	
 	private void enableLevels() {
@@ -205,6 +285,9 @@ public class StatisticsPanel extends JPanel {
 		level1.setVisible(true);
 		level2.setVisible(true);
 		level3.setVisible(true);
+		point21.setVisible(true);
+		point22.setVisible(true);
+		point23.setVisible(true);
 	}
 	
 	private class Handler implements ActionListener {
