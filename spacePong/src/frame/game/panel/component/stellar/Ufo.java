@@ -51,17 +51,17 @@ public class Ufo extends GameObject
 								.getScorePanel()
 								.getLiveCount();
 		
+		int oldScore = Integer.parseInt(panel.getTopPanel()
+											 .getScorePanel()
+											 .getScore());
+		
 		panel.getTopPanel()
 			 .getScorePanel()
 			 .setLiveCount(oldLiveCount-1);
 		
-		panel.pauseGame();
-		
-		if (panel.isGameFinished()) {
-			panel.getFrame().finishGame();
-		}
-		
-		panel.resumeGame();
+		panel.getTopPanel()
+			 .getScorePanel()
+			 .setScore((oldScore-25)+"");
 	}
 	
 	@Override

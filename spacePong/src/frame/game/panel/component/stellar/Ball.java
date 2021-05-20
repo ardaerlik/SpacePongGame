@@ -55,7 +55,7 @@ public class Ball extends GameObject
 	}
 	
 	private void moveController() {
-		if ((positionX+velocityX > 1024) || (positionX+velocityX < 0)) {
+		if ((positionX+velocityX > 1004) || (positionX+velocityX < 0)) {
 			velocityX = -velocityX;
 		}
 		if (positionY+velocityY > 478) {

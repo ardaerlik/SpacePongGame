@@ -23,7 +23,7 @@ public class TopPanel extends JPanel {
 	private void layoutManager() {
 		timerPanel = new TimerPanel(frame);
 		levelPanel = new LevelPanel(frame);
-		scorePanel = new ScorePanel(frame, 3, "123");
+		scorePanel = new ScorePanel(frame, 3, "0");
 		
 		setLayout(null);
 		

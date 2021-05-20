@@ -8,17 +8,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
 import frame.game.GameFrame;
 import frame.game.panel.component.stellar.Ball;
 import frame.game.panel.component.stellar.GameObject;
 import frame.game.panel.component.stellar.GameObjectHelper;
-import frame.game.panel.component.stellar.Meteor;
-import frame.game.panel.component.stellar.Star;
-import frame.game.panel.component.stellar.Ufo;
+import frame.game.panel.component.stellar.ObjectMode;
 
 public class GamePanel extends JPanel 
 	implements ActionListener, KeyListener {
@@ -36,8 +34,8 @@ public class GamePanel extends JPanel
 	private final int PADDLE_HEIGHT = 10;
 	private final int paddlePositionY = 470;
 	private final double fullTime = 60.0;
-	private int paddlePositionX = 50;
-	private int paddleVelocity = 5;
+	private int paddlePositionX = 100;
+	private int paddleVelocity = 6;
 	private int pressedKeysLoc;
 	private int pressedKeysLocInt;
 	private boolean isValid;
@@ -124,7 +122,7 @@ public class GamePanel extends JPanel
 		
 		gameObjects = new ArrayList<GameObject>();
 		
-		paddlePositionX = 50;
+		paddlePositionX = 100;
 		
 		ball = new Ball(this);
 
@@ -146,6 +144,7 @@ public class GamePanel extends JPanel
 	}
 	
 	private void paintBall(Graphics g) {
+		speedLimit();
 		ball.move();
 		g.drawImage(ball.getImage(), ball.getPositionX(), ball.getPositionY(), null);
 	}
@@ -166,7 +165,7 @@ public class GamePanel extends JPanel
 			}
 			
 			if (isValid) {
-				if (pressedKeysLocInt < 4) {
+				if (pressedKeysLocInt < 5) {
 					if (pressedKeys.get(pressedKeysLoc) == PressedKey.LEFT){
 						paddlePositionX -= paddleVelocity;
 					} else {
@@ -190,6 +189,24 @@ public class GamePanel extends JPanel
 				PADDLE_WIDTH, PADDLE_HEIGHT);
 	}
 	
+	private void speedLimit() {
+		if (ball.getVelocityY() > 17) {
+			ball.setVelocityY(15);
+		}
+		
+		if (ball.getVelocityX() > 7) {
+			ball.setVelocityX(5);
+		}
+		
+		if (ball.getVelocityY() < -17) {
+			ball.setVelocityY(-15);
+		}
+		
+		if (ball.getVelocityX() < -7) {
+			ball.setVelocityX(-5);
+		}
+	}
+	
 	private boolean isValidPosition(PressedKey e) {
 		switch (e) {
 			case LEFT:
@@ -204,8 +221,36 @@ public class GamePanel extends JPanel
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (GameObjectHelper.intersectsAny(ball, gameObjects)) {
+			GameObjectHelper.getIntersectedObject().stopAction();
 			GameObjectHelper.actionIntersectedObject(GameObjectHelper.getIntersectedObject());
 			gameObjects.remove(GameObjectHelper.getIntersectedObject());
+			
+			Random r = new Random();
+			int tmp = r.nextInt(100);
+			
+			if (tmp < 10) {
+				gameObjects = GameObjectHelper.newObject(gameObjects, ObjectMode.CLOUD, this);
+			}
+			else if ((tmp > 10) && (tmp < 25)) {
+				gameObjects = GameObjectHelper.newObject(gameObjects, ObjectMode.METEOR, this);
+			}
+			else if ((tmp > 25) && (tmp < 55)) {
+				gameObjects = GameObjectHelper.newObject(gameObjects, ObjectMode.MONEY, this);
+			}
+			else if ((tmp > 55) && (tmp < 65)) {
+				gameObjects = GameObjectHelper.newObject(gameObjects, ObjectMode.POISON, this);
+			}
+			else if ((tmp > 65) && (tmp < 90)) {
+				gameObjects = GameObjectHelper.newObject(gameObjects, ObjectMode.STAR, this);
+			}
+			else if ((tmp > 90) && (tmp < 95)) {
+				gameObjects = GameObjectHelper.newObject(gameObjects, ObjectMode.SURPRISEBOX, this);
+			}
+			else if ((tmp > 95) && (tmp < 100)) {
+				gameObjects = GameObjectHelper.newObject(gameObjects, ObjectMode.UFO, this);
+			}
+			
+			gameObjects.get(gameObjects.size()-1).startAction();;
 		}
 		
 		if (topPanel.getTimerPanel().getCurrentTime() >= fullTime) {
@@ -221,14 +266,14 @@ public class GamePanel extends JPanel
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (mode == Mode.PAUSE) {return;}
-		
+
 		switch (e.getKeyCode()) {
-			case (37):
+			case (KeyEvent.VK_LEFT):
 				if (isValidPosition(PressedKey.LEFT)) {
 					pressedKeys.add(PressedKey.LEFT);
 				}
 				break;
-			case (39):
+			case (KeyEvent.VK_RIGHT):
 				if (isValidPosition(PressedKey.RIGHT)) {
 					pressedKeys.add(PressedKey.RIGHT);
 				}

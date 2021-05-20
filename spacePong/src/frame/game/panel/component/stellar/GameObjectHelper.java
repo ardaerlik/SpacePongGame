@@ -115,10 +115,41 @@ public class GameObjectHelper {
 		return objects;
 	}
 	
-	private static ArrayList<GameObject> addNewObject(){
-		ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+	public static ArrayList<GameObject> newObject(ArrayList<GameObject> objects, 
+			ObjectMode mode, GamePanel panel){
 		
-		return gameObjects;
+		GameObject object = null;
+		
+		switch (mode) {
+		case BALL:
+			object = new Ball(panel);
+			break;
+		case CLOUD:
+			object = new Cloud(panel);
+			break;
+		case METEOR:
+			object = new Meteor(panel);
+			break;
+		case MONEY:
+			object = new Money(panel);
+			break;
+		case POISON:
+			object = new Poison(panel);
+			break;
+		case STAR:
+			object = new Star(panel);
+			break;
+		case SURPRISEBOX:
+			object = new SurpriseBox(panel);
+			break;
+		case UFO:
+			object = new Ufo(panel);
+			break;
+		}
+		
+		objects = controlLocation(objects, object);
+		
+		return objects;
 	}
 	
 	public static void actionIntersectedObject(GameObject gameObject) {

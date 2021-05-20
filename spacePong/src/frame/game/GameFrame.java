@@ -2,7 +2,6 @@ package frame.game;
 
 import frame.game.panel.*;
 import main.Main;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
