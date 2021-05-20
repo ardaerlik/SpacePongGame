@@ -19,11 +19,14 @@ public class GameFrame extends JFrame
 	private GamePanel gamePanel;
 	private BelowPanel belowPanel;
 	private Timer timer;
+	private boolean isFinished;
 
 	public GameFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 1024, 768);
+		
+		isFinished = false;
 		
 		contentPane = new JPanel();
 		setContentPane(contentPane);  
@@ -132,7 +135,8 @@ public class GameFrame extends JFrame
 			newLevel();
 		}
 		
-		if (topPanel.getScorePanel().getLiveCount() == 0) {
+		if ((topPanel.getScorePanel().getLiveCount() <= 0) && !isFinished) {
+			isFinished = true;
 			finishGame();
 		}
 	}

@@ -204,8 +204,8 @@ public class GamePanel extends JPanel
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (GameObjectHelper.intersectsAny(ball, gameObjects)) {
-			System.out.println("carpisma");
-			//mode = Mode.PAUSE;
+			GameObjectHelper.actionIntersectedObject(GameObjectHelper.getIntersectedObject());
+			gameObjects.remove(GameObjectHelper.getIntersectedObject());
 		}
 		
 		if (topPanel.getTimerPanel().getCurrentTime() >= fullTime) {
@@ -245,6 +245,14 @@ public class GamePanel extends JPanel
 	public int[] getPaddlePosition() {
 		int[] position = {paddlePositionX, paddlePositionY};
 		return position;
+	}
+	
+	public boolean isGameFinished() {
+		if (frame.getTopPanel().getScorePanel().getLiveCount() == 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public ArrayList<GameObject> getGameObjects() {

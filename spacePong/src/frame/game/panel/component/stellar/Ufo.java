@@ -54,6 +54,14 @@ public class Ufo extends GameObject
 		panel.getTopPanel()
 			 .getScorePanel()
 			 .setLiveCount(oldLiveCount-1);
+		
+		panel.pauseGame();
+		
+		if (panel.isGameFinished()) {
+			panel.getFrame().finishGame();
+		}
+		
+		panel.resumeGame();
 	}
 	
 	@Override

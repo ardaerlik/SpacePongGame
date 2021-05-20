@@ -21,7 +21,7 @@ public class ScorePanel extends JPanel {
 		this.frame = frame;
 		this.liveCount = liveCount;
 		this.score = score;
-		this.liveLabels = new JLabel[liveCount];
+		this.liveLabels = new JLabel[7];
 		
 		setBounds(10, 10, 55*liveCount, 100);
 		layoutManager();
@@ -35,7 +35,13 @@ public class ScorePanel extends JPanel {
 			JLabel tmpLabel = new JLabel("");
 			tmpLabel.setIcon(new ImageIcon("spacePong/assets/images/gameObjects/heart.png"));
 			tmpLabel.setBounds(10 + i*50, 55, 45, 47);
+			tmpLabel.setVisible(false);
+			liveLabels[i] = tmpLabel;
 			add(tmpLabel);
+		}
+		
+		for (int i=0; i<liveCount; i++) {
+			liveLabels[i].setVisible(true);
 		}
 		
 		scoreLabel = new JLabel(score);

@@ -121,12 +121,6 @@ public class GameObjectHelper {
 		return gameObjects;
 	}
 	
-	private static ArrayList<GameObject> deleteNewObject(){
-		ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-		
-		return gameObjects;
-	}
-	
 	public static void actionIntersectedObject(GameObject gameObject) {
 		gameObject.action();
 	}
