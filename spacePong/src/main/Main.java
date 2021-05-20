@@ -1,7 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import frame.animate.ProgressFrame;
 import frame.animate.panel.MainPanel.Mode;
