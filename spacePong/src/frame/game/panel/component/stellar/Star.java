@@ -20,7 +20,7 @@ public class Star extends GameObject
 	private double velocityY;
 	
 	public Star(GamePanel panel) {
-		super(0, 0, 85, 81, ObjectMode.STAR);
+		super(25, 30, 85, 81, ObjectMode.STAR);
 		this.panel = panel;
 		this.velocityY = 2;
 		
@@ -66,6 +66,10 @@ public class Star extends GameObject
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean isOutOfFrame() {
+		return (super.positionY > panel.getHeight()) ? true: false;
 	}
 	
 	public GamePanel getPanel() {

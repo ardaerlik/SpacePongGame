@@ -17,13 +17,14 @@ public class Cloud extends GameObject
 	private BufferedImage cloudBuffImage;
 	
 	public Cloud(GamePanel panel) {
-		super(0, 0, 120, 66, ObjectMode.CLOUD);
+		super(0, 0, 60, 33, ObjectMode.CLOUD);
 		this.panel = panel;
 		
 		try {
 			cloudBuffImage = ImageIO.read(new File("spacePong/assets/images/gameObjects/cloud.png"));
 			super.setBuffImage(cloudBuffImage);
 			this.cloudImage = cloudBuffImage.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
+			super.setImage(cloudBuffImage);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -17,13 +17,14 @@ public class SurpriseBox extends GameObject
 	private BufferedImage surpriseBuffImage;
 	
 	public SurpriseBox(GamePanel panel) {
-		super(0, 0, 80, 85, ObjectMode.SURPRISEBOX);
+		super(233, 123, 80, 85, ObjectMode.SURPRISEBOX);
 		this.panel = panel;
 		
 		try {
 			surpriseBuffImage = ImageIO.read(new File("spacePong/assets/images/gameObjects/surprise.png"));
 			super.setBuffImage(surpriseBuffImage);
 			this.surpriseImage = surpriseBuffImage.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
+			super.setImage(surpriseBuffImage);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

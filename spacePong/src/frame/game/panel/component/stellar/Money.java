@@ -17,13 +17,14 @@ public class Money extends GameObject
 	private BufferedImage moneyBuffImage;
 	
 	public Money(GamePanel panel) {
-		super(340, 60, 70, 84, ObjectMode.MONEY);
+		super(311, 190, 70, 84, ObjectMode.MONEY);
 		this.panel = panel;
 		
 		try {
 			moneyBuffImage = ImageIO.read(new File("spacePong/assets/images/gameObjects/money.png"));
 			super.setBuffImage(moneyBuffImage);
 			this.moneyImage = moneyBuffImage.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
+			super.setImage(moneyBuffImage);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

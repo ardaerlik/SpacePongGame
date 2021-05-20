@@ -30,7 +30,7 @@ public class Ufo extends GameObject
 	private int combination = 0;
 	
 	public Ufo(GamePanel panel) {
-		super(0, 0, 90, 66, ObjectMode.UFO);
+		super(789, 121, 90, 66, ObjectMode.UFO);
 		this.panel = panel;
 		
 		super.setTimer(new Timer(40, this));

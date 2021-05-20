@@ -17,13 +17,14 @@ public class Poison extends GameObject
 	private BufferedImage poisonBuffImage;
 	
 	public Poison(GamePanel panel) {
-		super(340, 60, 45, 90, ObjectMode.POISON);
+		super(545, 21, 45, 90, ObjectMode.POISON);
 		this.panel = panel;
 		
 		try {
 			poisonBuffImage = ImageIO.read(new File("spacePong/assets/images/gameObjects/poison.png"));
 			super.setBuffImage(poisonBuffImage);
 			this.poisonImage = poisonBuffImage.getScaledInstance(-1, -1, Image.SCALE_SMOOTH);
+			super.setImage(poisonBuffImage);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

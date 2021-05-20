@@ -24,27 +24,28 @@ public class GamePanel extends JPanel
 	implements ActionListener, KeyListener {
 	
 	private ArrayList<GameObject> gameObjects;
+	private ArrayList<PressedKey> pressedKeys;
+	
 	private enum PressedKey {LEFT, RIGHT};
+	private Mode mode;
 	private GameFrame frame;
 	private TopPanel topPanel;
-	private Mode mode;
+	private Rectangle paddle;
 	private Timer timer;
 	private final int PADDLE_WIDTH = 120;
 	private final int PADDLE_HEIGHT = 10;
 	private final int paddlePositionY = 470;
+	private final double fullTime = 60.0;
 	private int paddlePositionX = 50;
-	private Rectangle paddle;
 	private int paddleVelocity = 5;
-	private ArrayList<PressedKey> pressedKeys;
 	private int pressedKeysLoc;
 	private int pressedKeysLocInt;
 	private boolean isValid;
-	private Ball ball;
-	private Meteor meteor;
-	private Star star;
-	private Ufo ufo;
-	private final double fullTime = 60.0;
 	private boolean timeIsOver;
+	private Ball ball;
+	/*private Meteor meteor;
+	private Star star;
+	private Ufo ufo;*/
 	
 	public GamePanel(GameFrame frame, TopPanel topPanel) {
 		this.frame = frame;
@@ -63,20 +64,22 @@ public class GamePanel extends JPanel
 		addKeyListener(this);
 		
 		ball = new Ball(this);
-		meteor = new Meteor(this);
+		/*meteor = new Meteor(this);
 		star = new Star(this);
-		ufo = new Ufo(this);
+		ufo = new Ufo(this);*/
 		timer = new Timer(20, this);
 		paddle = new Rectangle(paddlePositionX, paddlePositionY, 
 				PADDLE_WIDTH, PADDLE_HEIGHT);
 		
-		star.setPositionX(480);
+		/*star.setPositionX(480);
 		star.setPositionY(60);
 		ufo.setPositionX(540);
 		ufo.setPositionY(60);
 		gameObjects.add(meteor);
 		gameObjects.add(star);
-		gameObjects.add(ufo);
+		gameObjects.add(ufo);*/
+		
+		gameObjects = GameObjectHelper.generateObjects(this);
 	}
 	
 	public void pauseGame() {
@@ -137,10 +140,12 @@ public class GamePanel extends JPanel
 		paddlePositionX = 50;
 		
 		ball = new Ball(this);
-		meteor = new Meteor(this);
+		//meteor = new Meteor(this);
 		timer = new Timer(20, this);
 		paddle = new Rectangle(paddlePositionX, paddlePositionY, 
 				PADDLE_WIDTH, PADDLE_HEIGHT);
+		
+		gameObjects = GameObjectHelper.generateObjects(this);
 		
 		repaint();
 	}
