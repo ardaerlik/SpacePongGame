@@ -31,7 +31,9 @@ public class SurpriseBox extends GameObject
 	}
 
 	@Override
-	public void action() {}
+	public void action() {
+		panel.setSurpriseBoxCount(panel.getSurpriseBoxCount() + 1);
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {}

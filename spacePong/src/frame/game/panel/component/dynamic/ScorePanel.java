@@ -52,10 +52,18 @@ public class ScorePanel extends JPanel {
 	}
 	
 	public void setLiveCount(int liveCount) {
-		this.liveCount = liveCount;
+		if (liveCount > 3) {
+			this.liveCount = 3;
+		} else {
+			this.liveCount = liveCount;
+		}
 		
-		for (int i=liveCount; i<liveLabels.length; i++) {
+		for (int i=this.liveCount; i<liveLabels.length; i++) {
 			liveLabels[i].setVisible(false);
+		}
+		
+		for (int i=0; i<this.liveCount; i++) {
+			liveLabels[i].setVisible(true);
 		}
 	}
 	

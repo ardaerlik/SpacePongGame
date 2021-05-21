@@ -1,7 +1,5 @@
 package frame.game;
 
-import frame.game.panel.*;
-import main.Main;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -9,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SpringLayout;
 import javax.swing.Timer;
+import frame.game.panel.*;
+import main.Main;
 
 public class GameFrame extends JFrame 
 	implements ActionListener {
@@ -79,7 +79,8 @@ public class GameFrame extends JFrame
 	public void finishGame() {
 		Main.setLastGameSettings(Integer.parseInt(topPanel.getLevelPanel().getLevel()),
 				Integer.parseInt(topPanel.getScorePanel().getScore()), 
-				Integer.parseInt(topPanel.getScorePanel().getScore()));
+				Integer.parseInt(topPanel.getScorePanel().getScore()),
+				gamePanel.getSurpriseBoxCount());
 		
 		Main.progressPageToHome();
 	}

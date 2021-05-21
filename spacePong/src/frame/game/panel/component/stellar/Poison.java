@@ -31,7 +31,9 @@ public class Poison extends GameObject
 	}
 
 	@Override
-	public void action() {}
+	public void action() {
+		panel.freezePaddle();
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {}

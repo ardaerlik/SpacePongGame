@@ -38,6 +38,7 @@ public class GamePanel extends JPanel
 	private int paddleVelocity = 6;
 	private int pressedKeysLoc;
 	private int pressedKeysLocInt;
+	private int surpriseBoxCount;
 	private long startTime;
 	private long endTime;
 	private boolean isValid;
@@ -55,6 +56,8 @@ public class GamePanel extends JPanel
 		pressedKeysLocInt = 0;
 		timeIsOver = false;
 		isFreezed = false;
+		
+		surpriseBoxCount = 0;
 		
 		gameObjects = new ArrayList<GameObject>();
 		
@@ -165,6 +168,7 @@ public class GamePanel extends JPanel
 	
 	public void freezePaddle() {
 		isFreezed = true;
+		startTime = System.currentTimeMillis();
 	}
 	
 	public void runPaddle() {
@@ -237,7 +241,15 @@ public class GamePanel extends JPanel
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {		
+	public void actionPerformed(ActionEvent e) {
+		if (isFreezed) {
+			endTime = System.currentTimeMillis();
+			
+			if (endTime-startTime > 1500) {
+				isFreezed = false;
+			}
+		}
+		
 		for (int i=0; i<gameObjects.size(); i++) {
 			if (gameObjects.get(i) instanceof Star) {
 				if (((Star) gameObjects.get(i)).isOutOfFrame()) {
@@ -252,7 +264,7 @@ public class GamePanel extends JPanel
 			GameObjectHelper.getIntersectedObject().stopAction();
 			GameObjectHelper.actionIntersectedObject(GameObjectHelper.getIntersectedObject());
 			gameObjects.remove(GameObjectHelper.getIntersectedObject());
-			
+
 			Random r = new Random();
 			int tmp = r.nextInt(100);
 			
@@ -295,18 +307,19 @@ public class GamePanel extends JPanel
 	public void keyPressed(KeyEvent e) {
 		if (mode == Mode.PAUSE) {return;}
 		
-
-		switch (e.getKeyCode()) {
-			case (KeyEvent.VK_LEFT):
-				if (isValidPosition(PressedKey.LEFT)) {
-					pressedKeys.add(PressedKey.LEFT);
-				}
-				break;
-			case (KeyEvent.VK_RIGHT):
-				if (isValidPosition(PressedKey.RIGHT)) {
-					pressedKeys.add(PressedKey.RIGHT);
-				}
-				break;
+		if (!isFreezed) {
+			switch (e.getKeyCode()) {
+				case (KeyEvent.VK_LEFT):
+					if (isValidPosition(PressedKey.LEFT)) {
+						pressedKeys.add(PressedKey.LEFT);
+					}
+					break;
+				case (KeyEvent.VK_RIGHT):
+					if (isValidPosition(PressedKey.RIGHT)) {
+						pressedKeys.add(PressedKey.RIGHT);
+					}
+					break;
+			}
 		}
 	}
 
@@ -455,6 +468,14 @@ public class GamePanel extends JPanel
 
 	public void setTimeIsOver(boolean timeIsOver) {
 		this.timeIsOver = timeIsOver;
+	}
+
+	public int getSurpriseBoxCount() {
+		return surpriseBoxCount;
+	}
+
+	public void setSurpriseBoxCount(int surpriseBoxCount) {
+		this.surpriseBoxCount = surpriseBoxCount;
 	}
 	
 }

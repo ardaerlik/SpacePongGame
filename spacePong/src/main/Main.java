@@ -21,6 +21,7 @@ public class Main {
 	private static int maxLevel;
 	private static int maxScore;
 	private static int money;
+	private static int boxCount;
 	
 	public static void main(String[] args) throws InterruptedException {
 		userName = "PlayerDEMO";
@@ -133,11 +134,15 @@ public class Main {
 		progressFrame.getLabelPanel1().setText("Settings is loading...");
 	}
 	
+	public static void progressPageToGift() {
+		
+	}
+	
 	public static void killProgressTimer() {
 		progressFrame.getMainPanel().stopTimer();
 	}
 	
-	public static void setLastGameSettings(int maxLevel, int maxScore, int money) {
+	public static void setLastGameSettings(int maxLevel, int maxScore, int money, int boxCount) {
 		int userNo = User.checkUserList(userName);
 		Main.money = money;
 		Main.maxLevel = maxLevel;

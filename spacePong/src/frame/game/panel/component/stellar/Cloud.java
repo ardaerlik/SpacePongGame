@@ -46,7 +46,7 @@ public class Cloud extends GameObject
 
 		panel.getTopPanel()
 			 .getScorePanel()
-			 .setScore((oldScore-25)+"");
+			 .setScore((oldScore+25)+"");
 	}
 	
 	@Override

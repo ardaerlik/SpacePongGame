@@ -77,6 +77,7 @@ public class Ball extends GameObject
 				 .getScorePanel()
 				 .setLiveCount(oldLiveCount-1);
 			
+			panel.runPaddle();
 		}
 		
 		paddleForce();

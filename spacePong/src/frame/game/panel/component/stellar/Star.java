@@ -41,7 +41,7 @@ public class Star extends GameObject
 											 .getScorePanel()
 											 .getScore());
 		
-		String newScore = (oldScore + 10) + "";
+		String newScore = (oldScore + 25) + "";
 		
 		panel.getTopPanel()
 			 .getScorePanel()

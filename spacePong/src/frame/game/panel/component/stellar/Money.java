@@ -31,7 +31,17 @@ public class Money extends GameObject
 	}
 
 	@Override
-	public void action() {}
+	public void action() {
+		int oldScore = Integer.parseInt(panel.getTopPanel()
+				 			  .getScorePanel()
+				 			  .getScore());
+
+		String newScore = (oldScore + 15) + "";
+
+		panel.getTopPanel()
+			 .getScorePanel()
+			 .setScore(newScore);
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {}
