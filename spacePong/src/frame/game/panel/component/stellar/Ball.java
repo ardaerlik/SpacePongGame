@@ -77,7 +77,6 @@ public class Ball extends GameObject
 				 .getScorePanel()
 				 .setLiveCount(oldLiveCount-1);
 			
-			//panel.setPressedKeys(new ArrayList<GamePanel.PressedKey>());
 		}
 		
 		paddleForce();
