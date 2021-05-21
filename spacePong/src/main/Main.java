@@ -26,6 +26,7 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 		userName = "PlayerDEMO";
 		User.getOldUserList();
+		setMoneyAndTheme();
 		
 		progressFrame = new ProgressFrame();
 		progressFrame.setVisible(true);
@@ -35,6 +36,17 @@ public class Main {
 		Thread.sleep(6700);
 		
 		homePage();
+	}
+	
+	public static void setMoneyAndTheme() {
+		ArrayList<User> users = User.getUsers();
+		
+		for (int i=0; i<users.size(); i++) {
+			if (userName.equals(users.get(i).getName())) {
+				Main.money = users.get(i).getMoney();
+				Main.themes = users.get(i).getThemes();
+			}
+		}
 	}
 	
 	public static void homePage() {
@@ -109,6 +121,7 @@ public class Main {
 	public static void progressPageToHome() {
 		progressPage();
 		User.updateAllUsers(User.getUsers());
+		setMoneyAndTheme();
 		progressFrame.setMode(Mode.TO_HOME);
 		progressFrame.getLabelPanel1().setText("Home is loading...");
 	}
@@ -171,19 +184,19 @@ public class Main {
 		return userName;
 	}
 	
-	public String[] getThemes() {
+	public static String[] getThemes() {
 		return themes;
 	}
 
-	public int getMaxLevel() {
+	public static int getMaxLevel() {
 		return maxLevel;
 	}
 
-	public int getMaxScore() {
+	public static int getMaxScore() {
 		return maxScore;
 	}
 
-	public int getMoney() {
+	public static int getMoney() {
 		return money;
 	}
 	
@@ -191,20 +204,28 @@ public class Main {
 		Main.userName = userName;
 	}
 
-	public void setThemes(String[] themes) {
+	public static void setThemes(String[] themes) {
 		Main.themes = themes;
 	}
 
-	public void setMaxLevel(int maxLevel) {
+	public static void setMaxLevel(int maxLevel) {
 		Main.maxLevel = maxLevel;
 	}
 
-	public void setMaxScore(int maxScore) {
+	public static void setMaxScore(int maxScore) {
 		Main.maxScore = maxScore;
 	}
 
-	public void setMoney(int money) {
+	public static void setMoney(int money) {
 		Main.money = money;
+	}
+
+	public static int getBoxCount() {
+		return boxCount;
+	}
+
+	public static void setBoxCount(int boxCount) {
+		Main.boxCount = boxCount;
 	}
 
 }
