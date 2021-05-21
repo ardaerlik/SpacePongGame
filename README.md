@@ -96,6 +96,8 @@ public static void main(String[] args) throws InterruptedException {
     * *Progress bar is made with Java Swing Timer and Thread class*
     * *For more realistic software design*
     * *Stays between 5 to 6 seconds*
+* **Game Help Button**
+    * *Object actions are described here*
 
 [1] -> Inspired by [Ameer Taweel's](https://ku.blackboard.com/webapps/discussionboard/do/message?action=list_messages&course_id=_39693_1&nav=discussion_board_entry&conf_id=_49503_1&forum_id=_16476_1&message_id=_83558_1) theme colors.
 
@@ -220,10 +222,6 @@ private void paddleForce() {
 ## For Further Updates
 * **Sound System**
     * *Different soundtrack in different scenarios*
-* **Game Help Button**
-    * *Some parts have implemented*
-    * *For now, it only pauses the game*
-    * *When it will be updated, it shows new JFrame with information and images of game objects*
 * **Gift Hunt**
     * *Some parts have implemented*
     * *One of three different boxes will be selected, different types of rewards or penalties can be received*
@@ -270,6 +268,7 @@ private void paddleForce() {
             * GameAnimations.java
             * GameFrame.java
             * GameTheme.java
+            * HelpFrame.java
         * home
             * panel
                 * component
