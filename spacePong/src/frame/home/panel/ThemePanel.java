@@ -72,6 +72,8 @@ public class ThemePanel extends JPanel
 		button5.setBounds(358, 290, 300, 92);
 		button6.setBounds(689, 290, 300, 92);
 		
+		button1.setIcon(new ImageIcon("spacePong/assets/images/gameIcons/theme1.png"));
+		
 		button4.setIcon(new ImageIcon("spacePong/assets/images/gameButtons/save.png"));
 		button5.setIcon(new ImageIcon("spacePong/assets/images/gameButtons/save.png"));
 		button6.setIcon(new ImageIcon("spacePong/assets/images/gameButtons/save.png"));

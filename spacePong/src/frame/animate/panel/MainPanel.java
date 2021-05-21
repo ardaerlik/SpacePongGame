@@ -43,9 +43,6 @@ public class MainPanel extends JPanel
 	private void paintBar(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRect(100, 0, location, this.getHeight());
-		
-		g.setColor(Color.RED);
-		g.drawRect(100, 0, 822, this.getHeight()-1);
 	}
 
 	@Override

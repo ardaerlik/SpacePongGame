@@ -3,6 +3,8 @@ package frame.home.panel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -132,6 +134,7 @@ public class StatisticsPanel extends JPanel {
 	
 	private void setScoreChart() {
 		scoreChart = new JLabel("Score Rank");
+		scoreChart.setForeground(Color.WHITE);
 		scoreChart.setHorizontalTextPosition(SwingConstants.CENTER);
 		scoreChart.setVerticalTextPosition(SwingConstants.BOTTOM);
 		scoreChart.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 18));
@@ -144,6 +147,7 @@ public class StatisticsPanel extends JPanel {
 	
 	private void setLevelChart() {
 		levelChart = new JLabel("Level Rank");
+		levelChart.setForeground(Color.WHITE);
 		levelChart.setHorizontalTextPosition(SwingConstants.CENTER);
 		levelChart.setVerticalTextPosition(SwingConstants.BOTTOM);
 		levelChart.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 18));
@@ -158,10 +162,16 @@ public class StatisticsPanel extends JPanel {
 		score1 = new JLabel(scoreValues[0][0]);
 		score2 = new JLabel(scoreValues[1][0]);
 		score3 = new JLabel(scoreValues[2][0]);
+		score1.setForeground(Color.RED);
+		score2.setForeground(Color.RED);
+		score3.setForeground(Color.RED);
 		
 		point11 = new JLabel(scoreValues[0][1]);
 		point12 = new JLabel(scoreValues[1][1]);
 		point13 = new JLabel(scoreValues[2][1]);
+		point11.setForeground(Color.RED);
+		point12.setForeground(Color.RED);
+		point13.setForeground(Color.RED);
 
 		score1.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
 		score2.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
@@ -206,10 +216,16 @@ public class StatisticsPanel extends JPanel {
 		level1 = new JLabel(levelValues[0][0]);
 		level2 = new JLabel(levelValues[1][0]);
 		level3 = new JLabel(levelValues[2][0]);
+		level1.setForeground(Color.RED);
+		level2.setForeground(Color.RED);
+		level3.setForeground(Color.RED);
 		
 		point21 = new JLabel(levelValues[0][1]);
 		point22 = new JLabel(levelValues[1][1]);
 		point23 = new JLabel(levelValues[2][1]);
+		point21.setForeground(Color.RED);
+		point22.setForeground(Color.RED);
+		point23.setForeground(Color.RED);
 		
 		level1.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));
 		level2.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 13));

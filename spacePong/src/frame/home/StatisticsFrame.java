@@ -40,8 +40,8 @@ public class StatisticsFrame extends JFrame {
 		springLayout.putConstraint(SpringLayout.WEST, creditsButtonsPanel, 0, SpringLayout.WEST, contentPane);
 		springLayout.putConstraint(SpringLayout.EAST, creditsButtonsPanel, 1024, SpringLayout.WEST, contentPane);
 		
-		statisticsPanel.setBackground(Color.MAGENTA);
-		creditsButtonsPanel.setBackground(Color.GREEN);
+		statisticsPanel.setBackground(new Color(40, 40, 40));
+		creditsButtonsPanel.setBackground(new Color(235, 219, 178));
 		
 		contentPane.add(statisticsPanel);
 		contentPane.add(creditsButtonsPanel); 

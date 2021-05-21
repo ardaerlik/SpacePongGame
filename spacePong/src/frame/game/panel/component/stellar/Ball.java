@@ -87,6 +87,14 @@ public class Ball extends GameObject
 		if (GameObjectHelper.paddleIntersects(panel.getPaddle(), this)) {
 			int paddlePositionX = panel.getPaddlePosition()[0];
 			
+			int oldScore = Integer.parseInt(panel.getTopPanel()
+					  .getScorePanel()
+					  .getScore());
+			
+			panel.getTopPanel()
+			 .getScorePanel()
+			 .setScore((oldScore+5)+"");
+			
 			velocityY = -velocityY+1;
 			velocityX += (positionX + width/2 - (paddlePositionX + panel.getPaddle().width/2))/10;
 		}

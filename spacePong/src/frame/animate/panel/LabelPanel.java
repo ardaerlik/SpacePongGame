@@ -1,5 +1,6 @@
 package frame.animate.panel;
 
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JLabel;
@@ -28,6 +29,7 @@ public class LabelPanel extends JPanel {
 		
 		setLayout(null);
 		label.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 40));
+		label.setForeground(Color.WHITE);
 		label.setBounds(35, 0, 140, 120);
 		
 		add(label);

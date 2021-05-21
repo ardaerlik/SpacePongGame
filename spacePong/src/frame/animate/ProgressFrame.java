@@ -56,22 +56,20 @@ public class ProgressFrame extends JFrame {
 		
 		labelPanel1.setBackground(Color.CYAN);
 		labelPanel2.setBackground(Color.GRAY);
-		mainPanel.setBackground(Color.MAGENTA);
+		mainPanel.setBackground(new Color(40, 40, 40));
 		
 		labelPanel1.setText("Game is loading...");
 		labelPanel1.setLabelBounds(getWidth()/2-225, 150, 840, 150);
+		labelPanel1.setBackground(new Color(40, 40, 40));
 		
 		labelPanel2.setText("0 %");
 		labelPanel2.setLabelBounds(getWidth()/2-760, 0, 840, 100);
+		labelPanel2.setBackground(new Color(40, 40, 40));
 		labelPanel2.setLabelAllignment();
 		
 		contentPane.add(labelPanel1);
 		contentPane.add(mainPanel);
 		contentPane.add(labelPanel2);
-	}
-	
-	public void setTheme(GameTheme theme) {
-		
 	}
 	
 	public void setMode(Mode mode) {

@@ -138,7 +138,7 @@ public class Main {
 		progressPage();
 		User.updateAllUsers(User.getUsers());
 		progressFrame.setMode(Mode.TO_STATISTICS);
-		progressFrame.getLabelPanel1().setText("Statistics is loading...");
+		progressFrame.getLabelPanel1().setText("Statistics are loading...");
 	}
 	
 	public static void progressPageToSettings() {

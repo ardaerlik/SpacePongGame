@@ -47,9 +47,9 @@ public class HomeFrame extends JFrame {
 		springLayout.putConstraint(SpringLayout.WEST, buttonsPanel, 0, SpringLayout.WEST, contentPane);
 		springLayout.putConstraint(SpringLayout.EAST, buttonsPanel, 1024, SpringLayout.WEST, contentPane);
 		
-		startPanel.setBackground(Color.MAGENTA);
-		themePanel.setBackground(Color.GREEN);
-		buttonsPanel.setBackground(Color.BLUE);
+		startPanel.setBackground(new Color(235, 219, 178));
+		themePanel.setBackground(new Color(40, 40, 40));
+		buttonsPanel.setBackground(new Color(235, 219, 178));
 		
 		contentPane.add(startPanel);
 		contentPane.add(themePanel);
