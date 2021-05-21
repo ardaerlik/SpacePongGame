@@ -22,6 +22,7 @@ public class Main {
 	private static int maxScore;
 	private static int money;
 	private static int boxCount;
+	private static int whichTheme;
 	
 	public static void main(String[] args) throws InterruptedException {
 		userName = "PlayerDEMO";
@@ -226,6 +227,14 @@ public class Main {
 
 	public static void setBoxCount(int boxCount) {
 		Main.boxCount = boxCount;
+	}
+
+	public static int getWhichTheme() {
+		return whichTheme;
+	}
+
+	public static void setWhichTheme(int whichTheme) {
+		Main.whichTheme = whichTheme;
 	}
 
 }
