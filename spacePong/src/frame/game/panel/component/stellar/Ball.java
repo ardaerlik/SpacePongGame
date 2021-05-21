@@ -55,16 +55,25 @@ public class Ball extends GameObject
 	}
 	
 	private void moveController() {
-		if ((positionX+velocityX > 1004) || (positionX+velocityX < 0)) {
+		if ((positionX+velocityX < 0) || (positionX+velocityX > 1004)) {
 			velocityX = -velocityX;
-		}
-		if (positionY+velocityY > 478) {
-			positionY = 478 + (int) velocityY;
-			velocityY = -velocityY;
 		}
 		if (positionY+velocityY < 0) {
 			positionY = 0 - (int) velocityY;
 			velocityY = -velocityY;
+		}
+		if (positionY+velocityY > 478) {
+			resetBall();
+			panel.resetPaddle();
+			
+			int oldLiveCount = panel.getTopPanel()
+									.getScorePanel()
+									.getLiveCount();
+			
+			panel.getFrame()
+				 .getTopPanel()
+				 .getScorePanel()
+				 .setLiveCount(oldLiveCount-1);
 		}
 		
 		paddleForce();

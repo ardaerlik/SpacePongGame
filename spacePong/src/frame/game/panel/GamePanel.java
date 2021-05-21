@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import frame.game.GameFrame;
@@ -17,6 +16,7 @@ import frame.game.panel.component.stellar.Ball;
 import frame.game.panel.component.stellar.GameObject;
 import frame.game.panel.component.stellar.GameObjectHelper;
 import frame.game.panel.component.stellar.ObjectMode;
+import frame.game.panel.component.stellar.Star;
 
 public class GamePanel extends JPanel 
 	implements ActionListener, KeyListener {
@@ -157,6 +157,10 @@ public class GamePanel extends JPanel
 		}
 	}
 	
+	public void resetPaddle() {
+		paddlePositionX = 100;
+	}
+	
 	private void smoothPaddle(Graphics g) {
 		if (pressedKeysLoc < pressedKeys.size()) {
 			
@@ -220,6 +224,16 @@ public class GamePanel extends JPanel
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		for (int i=0; i<gameObjects.size(); i++) {
+			if (gameObjects.get(i) instanceof Star) {
+				if (((Star) gameObjects.get(i)).isOutOfFrame()) {
+					gameObjects.remove(i);
+					gameObjects = GameObjectHelper.newObject(gameObjects, ObjectMode.STAR, this);
+					gameObjects.get(gameObjects.size()-1).startAction();
+				}
+			}
+		}
+		
 		if (GameObjectHelper.intersectsAny(ball, gameObjects)) {
 			GameObjectHelper.getIntersectedObject().stopAction();
 			GameObjectHelper.actionIntersectedObject(GameObjectHelper.getIntersectedObject());
@@ -250,7 +264,7 @@ public class GamePanel extends JPanel
 				gameObjects = GameObjectHelper.newObject(gameObjects, ObjectMode.UFO, this);
 			}
 			
-			gameObjects.get(gameObjects.size()-1).startAction();;
+			gameObjects.get(gameObjects.size()-1).startAction();
 		}
 		
 		if (topPanel.getTimerPanel().getCurrentTime() >= fullTime) {

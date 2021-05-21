@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.Timer;
 
 import frame.game.panel.GamePanel;
 
@@ -18,11 +17,13 @@ public class Star extends GameObject
 	private Image starImage;
 	private BufferedImage starBuffImage;
 	private double velocityY;
+	private boolean outOfFrame;
 	
 	public Star(GamePanel panel) {
 		super(25, 30, 85, 81, ObjectMode.STAR);
 		this.panel = panel;
 		this.velocityY = 2;
+		this.outOfFrame = false;
 		
 		try {
 			starBuffImage = ImageIO.read(new File("spacePong/assets/images/gameObjects/star.png"));
@@ -64,12 +65,13 @@ public class Star extends GameObject
 		if ((getPositionY() + velocityY) < panel.getHeight()) {
 			return true;
 		} else {
+			outOfFrame = true;
 			return false;
 		}
 	}
 	
 	public boolean isOutOfFrame() {
-		return (super.positionY > panel.getHeight()) ? true: false;
+		return outOfFrame;
 	}
 	
 	public GamePanel getPanel() {
