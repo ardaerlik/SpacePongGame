@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import frame.game.panel.GamePanel;
 
@@ -74,6 +76,8 @@ public class Ball extends GameObject
 				 .getTopPanel()
 				 .getScorePanel()
 				 .setLiveCount(oldLiveCount-1);
+			
+			//panel.setPressedKeys(new ArrayList<GamePanel.PressedKey>());
 		}
 		
 		paddleForce();

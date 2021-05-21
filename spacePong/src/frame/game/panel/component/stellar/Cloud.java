@@ -31,7 +31,23 @@ public class Cloud extends GameObject
 	}
 	
 	@Override
-	public void action() {}
+	public void action() {
+		int oldLiveCount = panel.getTopPanel()
+								.getScorePanel()
+								.getLiveCount();
+
+		int oldScore = Integer.parseInt(panel.getTopPanel()
+							  .getScorePanel()
+							  .getScore());
+
+		panel.getTopPanel()
+			 .getScorePanel()
+			 .setLiveCount(oldLiveCount+1);
+
+		panel.getTopPanel()
+			 .getScorePanel()
+			 .setScore((oldScore-25)+"");
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {}

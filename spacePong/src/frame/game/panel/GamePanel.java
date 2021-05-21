@@ -24,7 +24,7 @@ public class GamePanel extends JPanel
 	private ArrayList<GameObject> gameObjects;
 	private ArrayList<PressedKey> pressedKeys;
 	
-	private enum PressedKey {LEFT, RIGHT};
+	public enum PressedKey {LEFT, RIGHT};
 	private Mode mode;
 	private GameFrame frame;
 	private TopPanel topPanel;
@@ -38,8 +38,11 @@ public class GamePanel extends JPanel
 	private int paddleVelocity = 6;
 	private int pressedKeysLoc;
 	private int pressedKeysLocInt;
+	private long startTime;
+	private long endTime;
 	private boolean isValid;
 	private boolean timeIsOver;
+	private boolean isFreezed;
 	private Ball ball;
 	
 	public GamePanel(GameFrame frame, TopPanel topPanel) {
@@ -51,6 +54,7 @@ public class GamePanel extends JPanel
 		pressedKeysLoc = 0;
 		pressedKeysLocInt = 0;
 		timeIsOver = false;
+		isFreezed = false;
 		
 		gameObjects = new ArrayList<GameObject>();
 		
@@ -119,6 +123,7 @@ public class GamePanel extends JPanel
 		pressedKeysLoc = 0;
 		pressedKeysLocInt = 0;
 		timeIsOver = false;
+		isFreezed = false;
 		
 		gameObjects = new ArrayList<GameObject>();
 		
@@ -138,7 +143,8 @@ public class GamePanel extends JPanel
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		smoothPaddle(g);		
+				
+		smoothPaddle(g);
 		paintBall(g);
 		paintObjects(g);
 	}
@@ -155,6 +161,14 @@ public class GamePanel extends JPanel
 					gameObjects.get(i).getPositionX(), 
 					gameObjects.get(i).getPositionY(), null);
 		}
+	}
+	
+	public void freezePaddle() {
+		isFreezed = true;
+	}
+	
+	public void runPaddle() {
+		isFreezed = false;
 	}
 	
 	public void resetPaddle() {
@@ -223,7 +237,7 @@ public class GamePanel extends JPanel
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {		
 		for (int i=0; i<gameObjects.size(); i++) {
 			if (gameObjects.get(i) instanceof Star) {
 				if (((Star) gameObjects.get(i)).isOutOfFrame()) {
@@ -280,6 +294,7 @@ public class GamePanel extends JPanel
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (mode == Mode.PAUSE) {return;}
+		
 
 		switch (e.getKeyCode()) {
 			case (KeyEvent.VK_LEFT):
