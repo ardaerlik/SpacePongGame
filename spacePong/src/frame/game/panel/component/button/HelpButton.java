@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import frame.game.GameFrame;
+import frame.game.HelpFrame;
 import frame.game.panel.Mode;
 
 public class HelpButton extends JButton {
@@ -37,6 +40,7 @@ public class HelpButton extends JButton {
 				case RESUME:
 					frame.getGamePanel().pauseGame();
 					mode = Mode.PAUSE;
+					new HelpFrame(frame);
 					break;
 				case PAUSE:
 					frame.getGamePanel().resumeGame();
