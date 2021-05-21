@@ -73,13 +73,15 @@ public class ThemePanel extends JPanel
 		button6.setBounds(689, 290, 300, 92);
 		
 		button1.setIcon(new ImageIcon("spacePong/assets/images/gameIcons/theme1.png"));
+		button2.setIcon(new ImageIcon("spacePong/assets/images/gameIcons/theme2.png"));
+		button3.setIcon(new ImageIcon("spacePong/assets/images/gameIcons/theme3.png"));
 		
 		button4.setIcon(new ImageIcon("spacePong/assets/images/gameButtons/save.png"));
 		button5.setIcon(new ImageIcon("spacePong/assets/images/gameButtons/save.png"));
 		button6.setIcon(new ImageIcon("spacePong/assets/images/gameButtons/save.png"));
-		button4.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 21));
-		button5.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 21));
-		button6.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 21));
+		button4.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 16));
+		button5.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 16));
+		button6.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 16));
 		
 		button4.setBorderPainted(false);
 		button5.setBorderPainted(false);
@@ -143,18 +145,26 @@ public class ThemePanel extends JPanel
 			button3.setEnabled(false);
 		}
 		
+		button4.setText("You can buy for $50");
+		button5.setText("You can buy for $150");
+		button6.setText("You can buy for $250");
+		
 		if (money < themePrice1) {
 			button4.setEnabled(false);
+			button4.setText("You can't buy");
 		}
 		if (money < themePrice2) {
 			button5.setEnabled(false);
+			button5.setText("You can't buy");
 		}
-		if (money < themePrice3) {
+		if ((money < themePrice3) || (isSold3)) {
 			button6.setEnabled(false);
+			button6.setText("You can't buy");
 		}
 		
 		if (e.getSource() == button1) {
 			whichTheme = 1;
+			Main.setWhichTheme(1);
 			button1.setEnabled(false);
 			if (isSold2) {
 				button2.setEnabled(true);
@@ -165,6 +175,7 @@ public class ThemePanel extends JPanel
 		}
 		if (e.getSource() == button2) {
 			whichTheme = 2;
+			Main.setWhichTheme(2);
 			button2.setEnabled(false);
 			if (isSold1) {
 				button1.setEnabled(true);
@@ -175,6 +186,7 @@ public class ThemePanel extends JPanel
 		}
 		if (e.getSource() == button3) {
 			whichTheme = 3;
+			Main.setWhichTheme(3);
 			button3.setEnabled(false);
 			if (isSold1) {
 				button1.setEnabled(true);
@@ -185,6 +197,7 @@ public class ThemePanel extends JPanel
 		}
 		if (e.getSource() == button4) {
 			Main.setMoney(money - themePrice1);
+			button4.setText("You can't buy");
 			button4.setEnabled(false);
 			button1.setEnabled(true);
 			isSold1 = true;
@@ -200,6 +213,7 @@ public class ThemePanel extends JPanel
 		}
 		if (e.getSource() == button5) {
 			Main.setMoney(money - themePrice2);
+			button5.setText("You can't buy");
 			button5.setEnabled(false);
 			button2.setEnabled(true);
 			isSold2 = true;
@@ -215,6 +229,7 @@ public class ThemePanel extends JPanel
 		}
 		if (e.getSource() == button6) {
 			Main.setMoney(money - themePrice3);
+			button6.setText("You can't buy");
 			button6.setEnabled(false);
 			button3.setEnabled(true);
 			isSold3 = true;

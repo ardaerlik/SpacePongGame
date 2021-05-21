@@ -41,8 +41,8 @@ public class CreditsFrame extends JFrame {
 		springLayout.putConstraint(SpringLayout.WEST, creditsButtonsPanel, 0, SpringLayout.WEST, contentPane);
 		springLayout.putConstraint(SpringLayout.EAST, creditsButtonsPanel, 1024, SpringLayout.WEST, contentPane);
 		
-		creditsPanel.setBackground(Color.MAGENTA);
-		creditsButtonsPanel.setBackground(Color.GREEN);
+		creditsPanel.setBackground(new Color(40, 40, 40));
+		creditsButtonsPanel.setBackground(new Color(235, 219, 178));
 		
 		contentPane.add(creditsPanel);
 		contentPane.add(creditsButtonsPanel); 

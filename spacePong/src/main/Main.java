@@ -29,6 +29,8 @@ public class Main {
 		User.getOldUserList();
 		setMoneyAndTheme();
 		
+		whichTheme = 1;
+		
 		progressFrame = new ProgressFrame();
 		progressFrame.setVisible(true);
 		progressFrame.getMainPanel().startTimer();
@@ -63,6 +65,19 @@ public class Main {
 	public static void gamePage() {
 		gameFrame = new GameFrame();
 		gameFrame.setBounds(currentFrame.getBounds());
+		
+		switch (whichTheme) {
+		case 1:
+			gameFrame.setTheme(GameTheme.DEFAULT);
+			break;
+		case 2:
+			gameFrame.setTheme(GameTheme.OLD);
+			break;
+		case 3:
+			gameFrame.setTheme(GameTheme.DARK);
+			break;
+		}
+		
 		gameFrame.playGame();
 		gameFrame.setVisible(true);
 		currentFrame.setVisible(false);

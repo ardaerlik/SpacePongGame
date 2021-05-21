@@ -68,7 +68,26 @@ public class GameFrame extends JFrame
 	}
 	
 	public void setTheme(GameTheme theme) {
-		
+		switch (theme) {
+		case DEFAULT:
+			break;
+		case OLD:
+			gamePanel.setBackground(new Color(235, 219, 178));
+			topPanel.setBackground(new Color(233, 68, 55));
+			belowPanel.setBackground(new Color(233, 68, 55));
+			topPanel.getLevelPanel().setBackground(new Color(233, 68, 55));
+			topPanel.getScorePanel().setBackground(new Color(233, 68, 55));
+			topPanel.getTimerPanel().setBackground(new Color(233, 68, 55));
+			break;
+		case DARK:
+			gamePanel.setBackground(new Color(40, 40, 40));
+			topPanel.setBackground(new Color(245, 189, 72));
+			belowPanel.setBackground(new Color(245, 189, 72));
+			topPanel.getLevelPanel().setBackground(new Color(245, 189, 72));
+			topPanel.getScorePanel().setBackground(new Color(245, 189, 72));
+			topPanel.getTimerPanel().setBackground(new Color(245, 189, 72));
+			break;
+		}
 	}
 	
 	public void playGame() {

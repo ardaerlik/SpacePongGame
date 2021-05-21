@@ -45,21 +45,15 @@ public class TimerPanel extends JPanel implements ActionListener {
 		if ((int)degree%3 == 0) {
 			g.setColor(Color.BLACK);
 			g.fillArc(x, y, radius*2, radius*2, 90, (int) -degree);
-			g.setColor(Color.BLACK);
-			g.drawArc(x, y, radius*2, radius*2, 90, -360);
 		} else {
 			g.setColor(Color.RED);
 			g.fillArc(x, y, radius*2, radius*2, 90, (int) -degree);
-			g.setColor(Color.RED);
-			g.drawArc(x, y, radius*2, radius*2, 90, -360);
 		}
 	}
 	
 	private void normalTimer(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillArc(x, y, radius*2, radius*2, 90, (int) -degree);
-		g.setColor(Color.BLACK);
-		g.drawArc(x, y, radius*2, radius*2, 90, -360);
 	}
 	
 	@Override

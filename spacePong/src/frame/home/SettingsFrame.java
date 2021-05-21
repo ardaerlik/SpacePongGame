@@ -40,8 +40,8 @@ public class SettingsFrame extends JFrame {
 		springLayout.putConstraint(SpringLayout.WEST, creditsButtonsPanel, 0, SpringLayout.WEST, contentPane);
 		springLayout.putConstraint(SpringLayout.EAST, creditsButtonsPanel, 1024, SpringLayout.WEST, contentPane);
 		
-		settingsPanel.setBackground(Color.MAGENTA);
-		creditsButtonsPanel.setBackground(Color.GREEN);
+		settingsPanel.setBackground(new Color(40, 40, 40));
+		creditsButtonsPanel.setBackground(new Color(235, 219, 178));
 		
 		contentPane.add(settingsPanel);
 		contentPane.add(creditsButtonsPanel);

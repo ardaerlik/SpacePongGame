@@ -64,32 +64,35 @@ public class SettingsPanel extends JPanel {
 	}
 	
 	private void setPanel() {
-		panel.setBackground(Color.CYAN);
+		panel.setBackground(new Color(168, 150, 89));
 		panel.setBounds(61, 100, 496, 451);
 	}
 	
 	private void setTitleLabel() {
 		titleLabel.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 30));
 		titleLabel.setBounds(412, 0, 300, 70);
+		titleLabel.setForeground(Color.WHITE);
 	}
 	
 	private void setLabel1() {
 		label1.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 24));
 		label1.setHorizontalAlignment(SwingConstants.CENTER);
 		label1.setBounds(105, 130, 409, 50);
+		label1.setForeground(Color.WHITE);
 	}
 	
 	private void setLabel2() {
 		label2.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 24));
 		label2.setHorizontalAlignment(SwingConstants.CENTER);
 		label2.setBounds(105, 180, 409, 50);
+		label2.setForeground(Color.WHITE);
 	}
 	
 	private void setTextField() {
 		textField.setFont(new Font("Big_Bottom_Cartoon", Font.PLAIN, 18));
 		textField.setBounds(105, 335, 409, 151);
 		textField.setText(Main.getUserName());
-		textField.setBackground(Color.BLUE);
+		textField.setBackground(new Color(235, 219, 178));
 		textField.setColumns(10);
 	}
 	

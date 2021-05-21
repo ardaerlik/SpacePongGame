@@ -29,9 +29,10 @@ public class CreditsPanel extends JPanel {
 		
 		textArea.setText(text);
 		textArea.setEditable(false);
-		textArea.setBackground(Color.MAGENTA);
+		textArea.setBackground(new Color(40, 40, 40));
 		textArea.setBounds(frame.getWidth()/2-425, 50, 850, 540);
 		textArea.setFont(new Font("American Typewriter", Font.PLAIN, 18));
+		textArea.setForeground(Color.WHITE);
 		
 		setLayout(null);
 		
