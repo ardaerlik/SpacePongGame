@@ -1,5 +1,13 @@
 # Space Pong Game
 
+![GitHub repo size](https://img.shields.io/github/repo-size/ardaerlik/SpacePongGame?style=plastic)
+![Website](https://img.shields.io/website?down_message=offline&style=plastic&up_message=online&url=https%3A%2F%2Fardaerlik.me)
+
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/ardaerlik/SpacePongGame?style=plastic)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/ardaerlik/SpacePongGame?style=plastic)
+![Lines of code](https://img.shields.io/tokei/lines/github/ardaerlik/SpacePongGame?style=plastic)
+![GitHub top language](https://img.shields.io/github/languages/top/ardaerlik/SpacePongGame?style=plastic)
+
 ## Project Overview
 Created by: [Arda Erlik](https://github.com/ardaerlik) (0076108)
 
